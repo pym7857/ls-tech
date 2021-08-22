@@ -9,7 +9,7 @@
 7. Quill 글쓴것 자동저장/임시저장 기능
 8. [✔] Quill (markdown -> 원 글씨)  (https://codepen.io/ckujawa/pen/ExVOYEZ)
 9. AntD Css 손보기 
-10. [✔] 해시태그 구현
+10. [✔] 해시태그 구현 --> next는 동적 주소 불가: express + next 구현 
 11. [✔] 해시태그 검색기능
 12. [✔] 해시태그 정규표현식 수정 `ex) #오렌지<li>#사과</li>`  --> https://regexr.com
 13. 게시글 검색기능 
