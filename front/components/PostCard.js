@@ -77,12 +77,15 @@ const PostCard = ({ post }) => {
                     <div>
                         <p>[preview panel]</p>
                         <PreviewPanel mdText={post.content}/>
+
                         <p>[hashtag panel]</p>
                         {post.content.split(/(#[^\s]+)/g).map((v) => {
-                            if (v.match(/#[^\s]+[$<]/)) { // 해시태그인 애들은 Link로 감싸준다 
+                            // 해시태그인 애들은 Link로 감싸준다 
+                            if (v.match(/(#[\S]+)/)) { // ex) #사과<li>
+                                //console.log(v.split('<')[0].slice(1));
                                 return (
-                                    <Link href={{ pathname: '/hashtag', query: { tag: v.slice(1) } }} as={`/hashtag/${v.slice(1)}`} key={v}>
-                                        <a>{v}</a>
+                                    <Link href={{ pathname: '/hashtag', query: { tag: v.split('<')[0].slice(1) } }} as={`/hashtag/${v.split('<')[0].slice(1)}`} key={v}>
+                                        <a>#{v.split('<')[0].slice(1)}<br /></a>
                                     </Link>
                                 );
                             }

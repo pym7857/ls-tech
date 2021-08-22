@@ -5,7 +5,7 @@ import { LOAD_HASHTAG_POSTS_REQUEST } from '../reducers/post';
 import PostCard from '../components/PostCard';
 
 const Hashtag = ({ tag }) => { // getInitialProps로부터 전달받은 props 
-  console.log(tag);
+  //console.log(tag);
   const dispatch = useDispatch();
   const { mainPosts } = useSelector(state => state.post);
 

@@ -24,14 +24,14 @@ export default function Write() {
     if (!text || !text.trim()) {
       return alert('게시글을 작성하세요.'); // return으로 끊어줘야 밑에부분 실행안됨 
     }
-    console.log(text);
+    //console.log(text);
     dispatch({
       type: ADD_POST_REQUEST,
       data: {
         //content: text.trim(),
         content: text,
       },
-    });
+    }, [text]);
     Router.push('/');
   }, [text]); // useCallback안에서 쓴 state는 여기에 무조건 넣어주어야 한다 
 
