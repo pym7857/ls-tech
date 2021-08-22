@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Form, Input, Icon, Card, Avatar, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
+import marked from 'marked';
+import DOMPurify from "dompurify";
+
 import {
   LIKE_POST_REQUEST,
   UNLIKE_POST_REQUEST,
@@ -32,6 +35,24 @@ const PostCard = ({ post }) => {
         }
     }, [me && me.id, post && post.id, liked]);
 
+    // markdown 형식 -> 일반 글 형식 
+    const PreviewPanel = (props) => { // post.content   ex) <p>해시태그도 써볼까</p><ul><li>#md성공 #md</li><li>될까?</li></ul>
+        marked.setOptions({
+            renderer: new marked.Renderer(),   
+            gfm: true,
+            breaks: true,
+        });
+
+        const output = DOMPurify.sanitize(marked(props.mdText));
+        //console.log('output: ', output);
+        return (
+            <div 
+                id='preview' 
+                dangerouslySetInnerHTML= {{__html: output}}
+            />
+        );
+    }
+
     return (
         <Card
             key={+post.createdAt}
@@ -54,15 +75,18 @@ const PostCard = ({ post }) => {
                 title={post.User.nickname}
                 description={(
                     <div>
+                        <p>[preview panel]</p>
+                        <PreviewPanel mdText={post.content}/>
+                        <p>[hashtag panel]</p>
                         {post.content.split(/(#[^\s]+)/g).map((v) => {
-                            if (v.match(/#[^\s]+/)) { // 해시태그인 애들은 Link로 감싸준다 
+                            if (v.match(/#[^\s]+[$<]/)) { // 해시태그인 애들은 Link로 감싸준다 
                                 return (
                                     <Link href={{ pathname: '/hashtag', query: { tag: v.slice(1) } }} as={`/hashtag/${v.slice(1)}`} key={v}>
                                         <a>{v}</a>
                                     </Link>
                                 );
                             }
-                            return v; // 해시태그 아닌애들은 그냥 문자열 리턴 
+                            //return v; // 해시태그 아닌애들은 그냥 문자열 리턴 
                         })}
                     </div>
                 )}

@@ -10,6 +10,7 @@ import createSagaMiddleware from 'redux-saga';
 import AppLayout from '../components/AppLayout';
 import reducer from '../reducers';
 import rootSaga from '../sagas';
+
 import '../styles/globals.css';
 
 const LsTech = ({ Component, store, pageProps  }) => { // Component: next에서 넣어주는 props,   store: state, action, reducer가 합쳐진 것 
