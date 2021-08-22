@@ -1,11 +1,5 @@
 export const initialState = {
-    mainPosts: [{
-        User: {
-            id: 1,
-            nickname: 'ddd',
-        },
-        content: '첫번째 게시글',
-    }],
+    mainPosts: [],
     addPostErrorReason: '', // 포스트 업로드 실패 사유
     isAddingPost: false, // 포스트 업로드 중
     postAdded: false, // 포스트 업로드 성공
@@ -62,6 +56,71 @@ const reducer = (state = initialState, action) => {
             ...state,
             isAddingPost: false,
             addPostErrorReason: action.error,
+          };
+        }
+        case LOAD_MAIN_POSTS_REQUEST:
+        case LOAD_HASHTAG_POSTS_REQUEST:
+        case LOAD_USER_POSTS_REQUEST: {
+          return {
+            ...state,
+            mainPosts: [],
+          };
+        }
+        case LOAD_MAIN_POSTS_SUCCESS:
+        case LOAD_HASHTAG_POSTS_SUCCESS:
+        case LOAD_USER_POSTS_SUCCESS: {
+          return {
+            ...state,
+            mainPosts: action.data,
+          };
+        }
+        case LOAD_MAIN_POSTS_FAILURE:
+        case LOAD_HASHTAG_POSTS_FAILURE:
+        case LOAD_USER_POSTS_FAILURE: {
+          return {
+            ...state,
+          };
+        }
+        case LIKE_POST_REQUEST: {
+          return {
+            ...state,
+          };
+        }
+        case LIKE_POST_SUCCESS: {
+          const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId); // 내가 '좋아요' 누른 게시물이 몇번째 포스트인지 
+          const post = state.mainPosts[postIndex];
+          const Likers = [{ id: action.data.userId }, ...post.Likers]; // '좋아요'누른 사람목록에 내 이름 추가 
+          const mainPosts = [...state.mainPosts];
+          mainPosts[postIndex] = { ...post, Likers };
+          return {
+            ...state,
+            mainPosts,
+          };
+        }
+        case LIKE_POST_FAILURE: {
+          return {
+            ...state,
+          };
+        }
+        case UNLIKE_POST_REQUEST: {
+          return {
+            ...state,
+          };
+        }
+        case UNLIKE_POST_SUCCESS: {
+          const postIndex = state.mainPosts.findIndex(v => v.id === action.data.postId);
+          const post = state.mainPosts[postIndex];
+          const Likers = post.Likers.filter(v => v.id !== action.data.userId); // '좋아요'누른 사람목록에서 내 이름 빼기 (=필터링) 
+          const mainPosts = [...state.mainPosts];
+          mainPosts[postIndex] = { ...post, Likers };
+          return {
+            ...state,
+            mainPosts,
+          };
+        }
+        case UNLIKE_POST_FAILURE: {
+          return {
+            ...state,
           };
         }
         default: {

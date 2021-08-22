@@ -26,17 +26,18 @@ const AppLayout = ({ children }) => {
                 <Menu.Item key="mail">
                     <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
                 </Menu.Item>
+                <Menu.Item key="write"><Link href="/write"><a>글쓰기</a></Link></Menu.Item>
             </Menu>
             <Row gutter={10}>
-                <Col xs={24} md={6}>
+                <Col span={6}>
                     {me
                         ? <UserProfile />
                         : <LoginForm />}
                 </Col>
-                <Col xs={24} md={6}>
+                <Col span={14}>
                     {children}  
                 </Col>
-                <Col xs={24} md={6}>
+                <Col span={4}>
                     <Link href="https://www.naver.com"><a target="_blank">Naver</a></Link>
                 </Col>
             </Row>

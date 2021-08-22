@@ -16,7 +16,7 @@ const UserProfile = () => {
   return (
     <Card
       actions={[
-        <div key="twit">짹짹<br />{}</div>,
+        <div key="twit">짹짹<br />{me.Posts.length}</div>,
       ]}
     >
       <Card.Meta

@@ -1,19 +1,71 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Form, Input, Icon, Card, Avatar, Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  LIKE_POST_REQUEST,
+  UNLIKE_POST_REQUEST,
+} from '../reducers/post';
 
 const PostCard = ({ post }) => {
+    const { me } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+    const liked = me && post.Likers && post.Likers.find(v => v.id === me.id); // 좋아요 누른 상태 
+
+    const onToggleLike = useCallback(() => {
+        if (!me) {
+            return alert('로그인이 필요합니다!');
+        }
+        if (liked) { // 좋아요 누른 상태에서, 하트를 한번 더 누르면 
+            dispatch({
+                type: UNLIKE_POST_REQUEST,
+                data: post.id,
+            });
+        } else { // 좋아요 안 누른 상태에서, 하트를 누르면 
+            dispatch({
+                type: LIKE_POST_REQUEST,
+                data: post.id,
+            });
+        }
+    }, [me && me.id, post && post.id, liked]);
+
     return (
         <Card
             key={+post.createdAt}
             actions={[
-                <Icon type="heart" key="heart" />
+                <Icon 
+                    type="heart" 
+                    key="heart"
+                    theme={liked ? 'twoTone' : 'outlined'}
+                    twoToneColor="#eb2f96"
+                    onClick={onToggleLike} 
+                />
             ]}
         >
             <Card.Meta
-                avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
+                avatar={(
+                    <Link href={{ pathname: '/user', query: { id: post.User.id } }} as={`/user/${post.User.id}`}>
+                        <a><Avatar>{post.User.nickname[0]}</Avatar></a>
+                    </Link>
+                )}
                 title={post.User.nickname}
-                description={post.content}
+                description={(
+                    <div>
+                        {post.content.split(/(#[^\s]+)/g).map((v) => {
+                            if (v.match(/#[^\s]+/)) { // 해시태그인 애들은 Link로 감싸준다 
+                                return (
+                                    <Link href={{ pathname: '/hashtag', query: { tag: v.slice(1) } }} as={`/hashtag/${v.slice(1)}`} key={v}>
+                                        <a>{v}</a>
+                                    </Link>
+                                );
+                            }
+                            return v; // 해시태그 아닌애들은 그냥 문자열 리턴 
+                        })}
+                    </div>
+                )}
             >
             </Card.Meta>
         </Card>

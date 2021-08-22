@@ -17,7 +17,7 @@ const PostForm = () => {
   const onSubmitForm = useCallback((e) => {
     e.preventDefault();
     if (!text || !text.trim()) {
-      return alert('게시글을 작성하세요.');
+      return alert('게시글을 작성하세요.'); // return으로 끊어줘야 밑에부분 실행안됨 
     }
     //console.log(text);
     dispatch({

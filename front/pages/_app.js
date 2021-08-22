@@ -10,8 +10,9 @@ import createSagaMiddleware from 'redux-saga';
 import AppLayout from '../components/AppLayout';
 import reducer from '../reducers';
 import rootSaga from '../sagas';
+import '../styles/globals.css';
 
-const LsTech = ({ Component, store }) => { // Component: next에서 넣어주는 props,   store: state, action, reducer가 합쳐진 것 
+const LsTech = ({ Component, store, pageProps  }) => { // Component: next에서 넣어주는 props,   store: state, action, reducer가 합쳐진 것 
     return (
         <Provider store={store}>
             <Head>
@@ -19,7 +20,7 @@ const LsTech = ({ Component, store }) => { // Component: next에서 넣어주는
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.17.0/antd.css" />
             </Head>
             <AppLayout>
-                <Component />
+                <Component {...pageProps} />
             </AppLayout>
         </Provider>
     );
@@ -28,6 +29,17 @@ const LsTech = ({ Component, store }) => { // Component: next에서 넣어주는
 LsTech.propTypes = {
     Component: PropTypes.elementType, // any
     store: PropTypes.object,
+    pageProps: PropTypes.object.isRequired,
+};
+
+LsTech.getInitialProps = async (context) => { // next에서 context내려줌 (=next가 실행해주는 부분)
+    //console.log(context);
+    const { ctx, Component } = context; // Component = 페이지들 (윗줄 참조)
+    let pageProps = {};
+    if (Component.getInitialProps) { // 없을수도 있으니까 if문으로 감싸자 
+      pageProps = await Component.getInitialProps(ctx);
+    }
+    return { pageProps };
 };
 
 // 이 부분은 그냥 암기 

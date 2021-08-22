@@ -2,8 +2,12 @@ export const initialState = {
     isLoggingOut: false, // 로그아웃 시도중
     isLoggingIn: false, // 로그인 시도중
     logInErrorReason: '', // 로그인 실패 사유
+    
     me: null, // 내 정보
     userInfo: null, // 남의 정보
+
+    isEditingNickname: false, // 이름 변경 중
+    editNicknameErrorReason: '', // 이름 변경 실패 사유
 };
 
 // 액션 이름
@@ -18,6 +22,10 @@ export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
+
+export const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST';
+export const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS';
+export const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE';
 
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
 
@@ -66,14 +74,29 @@ const reducer = (state = initialState, action) => {
           };
         }
         case LOAD_USER_SUCCESS: {
-          return {
-            ...state,
-            me: action.data,
+          if (action.me) { // 내 정보(me) 일때
+            return {
+              ...state,
+              me: action.data,
+            };
+          }
+          return { // 남의 정보(userInfo) 일때 
+            ...state, 
+            userInfo: action.data, 
           };
         }
         case LOAD_USER_FAILURE: {
           return {
             ...state,
+          };
+        }
+        case ADD_POST_TO_ME: {
+          return {
+            ...state,
+            me: {
+              ...state.me,
+              Posts: [{ id: action.data }, ...state.me.Posts],
+            },
           };
         }
         default: {
