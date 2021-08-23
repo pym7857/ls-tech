@@ -15,6 +15,7 @@
 13. 게시글 검색기능 
 14. [✔] DB 연동 (=Sequalize)
 15. React + Marked + Highlight --> https://codesandbox.io/s/6zxq4wkyln?file=/src/index.js
-16. 닉네임, 비밀번호 변경 기능 
-17. SSR 적용 
-18. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
+16. NextJS에서 markdown으로 작성한 콘텐츠를 보여주는 방법 --> https://growd.tistory.com/78
+17. 닉네임, 비밀번호 변경 기능 
+18. SSR 적용 
+19. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
