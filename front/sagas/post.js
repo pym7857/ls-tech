@@ -19,6 +19,12 @@ import {
   UNLIKE_POST_FAILURE, 
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_SUCCESS,
+  LOAD_ALL_HASHTAGS_FAILURE,
+  LOAD_ALL_HASHTAGS_REQUEST,
+  LOAD_ALL_HASHTAGS_SUCCESS,
+  LOAD_ARTICLE_FAILURE,
+  LOAD_ARTICLE_REQUEST,
+  LOAD_ARTICLE_SUCCESS,
 } from '../reducers/post';
 import { ADD_POST_TO_ME } from '../reducers/user';
 
@@ -167,6 +173,48 @@ function* watchUnlikePost() {
   yield takeLatest(UNLIKE_POST_REQUEST, unlikePost);
 }
 
+function loadAllHashtagsAPI() {
+  return axios.get('/hashtags');
+}
+function* loadAllHashtags() {
+  try {
+    const result = yield call(loadAllHashtagsAPI);
+    yield put({
+      type: LOAD_ALL_HASHTAGS_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: LOAD_ALL_HASHTAGS_FAILURE,
+      error: e,
+    });
+  }
+}
+function* watchLoadAllHashtags() {
+  yield takeLatest(LOAD_ALL_HASHTAGS_REQUEST, loadAllHashtags);
+}
+
+function loadArticleAPI(postId) {
+  return axios.get(`/article/${postId}`);
+}
+function* loadArticle(action) {
+  try {
+    const result = yield call(loadArticleAPI, action.data);
+    yield put({
+      type: LOAD_ARTICLE_SUCCESS,
+      data: result.data, // article 
+    });
+  } catch (e) {
+    yield put({
+      type: LOAD_ARTICLE_FAILURE,
+      error: e,
+    });
+  }
+}
+function* watchLoadArticle() {
+  yield takeLatest(LOAD_ARTICLE_REQUEST, loadArticle);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadMainPosts),
@@ -175,5 +223,7 @@ export default function* postSaga() {
     fork(watchLoadUserPosts),
     fork(watchLikePost),
     fork(watchUnlikePost),
+    fork(watchLoadAllHashtags),
+    fork(watchLoadArticle),
   ]);
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { LOAD_HASHTAG_POSTS_REQUEST } from '../reducers/post';
 import PostCard from '../components/PostCard';
 
@@ -15,7 +16,10 @@ const Hashtag = ({ tag }) => { // getInitialProps로부터 전달받은 props
       data: tag,
     });
   }, []);
-  return (
+
+  //console.log('hashtag mainPosts: ', mainPosts);
+
+  return ( // 해당 해시태그 게시물 모두 보여줌 
     <div>
       {mainPosts.map(c => (
         <PostCard key={+c.createdAt} post={c} />

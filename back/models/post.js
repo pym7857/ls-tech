@@ -1,5 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     const Post = sequelize.define('Post', { // 테이블명은 posts
+      title: {
+        type: DataTypes.STRING(50), // 50자 이하 
+        allowNull: false,
+      },
+      subTitle: {
+        type: DataTypes.STRING(100), // 100자 이하 
+        allowNull: false,
+      },
       content: {
         type: DataTypes.TEXT, // 매우 긴 글
         allowNull: false,

@@ -15,9 +15,10 @@ const Home = () => {
         });
     }, []);
 
+    console.log('mainPosts: ', mainPosts);
+
     return(
         <div>
-            {me && <PostForm/>}
             {mainPosts.map((c) => {
                 return (
                     <PostCard key={c} post={c}/>

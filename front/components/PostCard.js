@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { Form, Input, Icon, Card, Avatar, Button } from 'antd';
+import { Icon, Card, Avatar } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-
-import marked from 'marked';
-import DOMPurify from "dompurify";
 
 import {
   LIKE_POST_REQUEST,
@@ -17,6 +14,8 @@ const PostCard = ({ post }) => {
     const dispatch = useDispatch();
 
     const liked = me && post.Likers && post.Likers.find(v => v.id === me.id); // 좋아요 누른 상태 
+
+    //console.log('liked:', liked);
 
     const onToggleLike = useCallback(() => {
         if (!me) {
@@ -35,23 +34,7 @@ const PostCard = ({ post }) => {
         }
     }, [me && me.id, post && post.id, liked]);
 
-    // markdown 형식 -> 일반 글 형식 
-    const PreviewPanel = (props) => { // post.content   ex) <p>해시태그도 써볼까</p><ul><li>#md성공 #md</li><li>될까?</li></ul>
-        marked.setOptions({
-            renderer: new marked.Renderer(),   
-            gfm: true,
-            breaks: true,
-        });
-
-        const output = DOMPurify.sanitize(marked(props.mdText));
-        //console.log('output: ', output);
-        return (
-            <div 
-                id='preview' 
-                dangerouslySetInnerHTML= {{__html: output}}
-            />
-        );
-    }
+    //console.log('(postCard) post:', post);
 
     return (
         <Card
@@ -75,17 +58,23 @@ const PostCard = ({ post }) => {
                 title={post.User.nickname}
                 description={(
                     <div>
-                        <p>[preview panel]</p>
-                        <PreviewPanel mdText={post.content}/>
+                        <div>
+                            <Link href={{ pathname: '/article', query: { id: post.id } }} as={`/article/${post.id}`} >
+                                <a>
+                                    <p style={{ fontSize: '30px', fontWeight: 'bold', color: 'black', marginBottom: '-2px'}}>{post.title}</p>
+                                    <p>{post.subTitle}</p>
+                                    <p>{post.createdAt.split('T')[0]}</p>
+                                </a>
+                            </Link>
+                        </div>
 
-                        <p>[hashtag panel]</p>
                         {post.content.split(/(#[^\s]+)/g).map((v) => {
                             // 해시태그인 애들은 Link로 감싸준다 
                             if (v.match(/(#[\S]+)/)) { // ex) #사과<li>
                                 //console.log(v.split('<')[0].slice(1));
                                 return (
                                     <Link href={{ pathname: '/hashtag', query: { tag: v.split('<')[0].slice(1) } }} as={`/hashtag/${v.split('<')[0].slice(1)}`} key={v}>
-                                        <a>#{v.split('<')[0].slice(1)}<br /></a>
+                                        <a style={{ color: '#3f729b' }}>#{v.split('<')[0].slice(1)} </a>
                                     </Link>
                                 );
                             }

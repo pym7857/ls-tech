@@ -3,6 +3,8 @@ export const initialState = {
     addPostErrorReason: '', // 포스트 업로드 실패 사유
     isAddingPost: false, // 포스트 업로드 중
     postAdded: false, // 포스트 업로드 성공
+    hashTags: [],
+    article: [],
 };
 
 export const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST';
@@ -32,6 +34,14 @@ export const UNLIKE_POST_FAILURE = 'UNLIKE_POST_FAILURE';
 export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
+
+export const LOAD_ALL_HASHTAGS_REQUEST = 'LOAD_ALL_HASHTAGS_REQUEST';
+export const LOAD_ALL_HASHTAGS_SUCCESS = 'LOAD_ALL_HASHTAGS_SUCCESS';
+export const LOAD_ALL_HASHTAGS_FAILURE = 'LOAD_ALL_HASHTAGS_FAILURE';
+
+export const LOAD_ARTICLE_REQUEST = 'LOAD_ARTICLE_REQUEST';
+export const LOAD_ARTICLE_SUCCESS = 'LOAD_ARTICLE_SUCCESS';
+export const LOAD_ARTICLE_FAILURE = 'LOAD_ARTICLE_FAILURE';
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -122,6 +132,40 @@ const reducer = (state = initialState, action) => {
           return {
             ...state,
           };
+        }
+        case LOAD_ALL_HASHTAGS_REQUEST: {
+          return {
+            ...state,
+            hashTags: [],
+          }
+        }
+        case LOAD_ALL_HASHTAGS_SUCCESS: {
+          return {
+            ...state,
+            hashTags: action.data,
+          }
+        }
+        case LOAD_ALL_HASHTAGS_FAILURE: {
+          return {
+            ...state,
+          }
+        }
+        case LOAD_ARTICLE_REQUEST: {
+          return {
+            ...state,
+            article: [],
+          }
+        }
+        case LOAD_ARTICLE_SUCCESS: {
+          return {
+            ...state,
+            article: [action.data],
+          }
+        }
+        case LOAD_ARTICLE_FAILURE: {
+          return {
+            ...state,
+          }
         }
         default: {
             return {

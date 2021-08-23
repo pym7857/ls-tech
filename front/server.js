@@ -29,9 +29,15 @@ app.prepare().then(() => {
     },
   }));
 
+  /* pages폴더와 연결할 동적 라우터들은 여기에 명시해주어야 한다 (GET요청) */
   server.get('/hashtag/:tag', (req, res) => {
     return app.render(req, res, '/hashtag', { tag: req.params.tag }); // app은 next였음 (윗줄 참조)
                                                                       // pages폴더의 hashtag.js와 연결해줌 
+  });
+
+  server.get('/article/:id', (req, res) => {
+    return app.render(req, res, '/article', { id: req.params.id }); 
+                                                                  
   });
 
   server.get('/user/:id', (req, res) => {

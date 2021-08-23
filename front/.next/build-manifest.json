@@ -29,11 +29,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/hashtag": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/hashtag.js"
-    ],
     "/write": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

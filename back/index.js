@@ -12,6 +12,8 @@ const userAPIRouter = require('./routes/user');
 const postAPIRouter = require('./routes/post');
 const postsAPIRouter = require('./routes/posts');
 const hashtagAPIRouter = require('./routes/hashtag');
+const hashtagsAPIRouter = require('./routes/hashtags');
+const articleAPIRouter = require('./routes/article');
 
 dotenv.config(); // dotenv 실행 
 const app = express();
@@ -44,6 +46,8 @@ app.use('/api/user', userAPIRouter);
 app.use('/api/post', postAPIRouter);
 app.use('/api/posts', postsAPIRouter);
 app.use('/api/hashtag', hashtagAPIRouter);
+app.use('/api/hashtags', hashtagsAPIRouter);
+app.use('/api/article', articleAPIRouter);
 
 app.listen(3065, () => {
   console.log('server is running on http://localhost:3065');
