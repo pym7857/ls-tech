@@ -16,7 +16,7 @@
 14. [✔] DB 연동 (=Sequalize)
 15. React + Marked + Highlight --> https://codesandbox.io/s/6zxq4wkyln?file=/src/index.js
 16. NextJS에서 markdown으로 작성한 콘텐츠를 보여주는 방법 --> https://growd.tistory.com/78
-17. React Nextjs에서 tui.editor 사용하기 📌
+17. React Nextjs에서 tui.editor 사용하기 ("@toast-ui/react-editor": "^2.0.1",) 📌
 - https://github.com/myeongjae-kim/tui.editor-with-nextjs
 - https://myeongjae.kim/blog/2020/04/05/tui-editor-with-nextjs
 18. 닉네임, 비밀번호 변경 기능 
