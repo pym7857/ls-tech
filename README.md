@@ -19,8 +19,9 @@
 18. 닉네임, 비밀번호 변경 기능 
 19. 글 수정 기능 
 20. 페이지네이션 제작 
-21. [✔] MD Viewer
-22. HTML Viewer
-23. Excel Viewer
-24. SSR 적용 
-25. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
+21. 트리구조 페이지 (=컨플루언스)
+22. [✔] MD Viewer
+23. HTML Viewer
+24. Excel Viewer
+25. SSR 적용 
+26. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
