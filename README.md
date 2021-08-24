@@ -6,13 +6,12 @@
 4. [✔] Quill 글쓴거 데이터베이스와 연동 및 게시글 보이기  
 5. [✔] Quill 글쓰는칸에 이미지 붙여넣기 
 8. [✔] Quill (markdown -> 원 글씨)  (https://codepen.io/ckujawa/pen/ExVOYEZ)
-9. AntD Css 손보기 
+9. [✔] AntD Css 손보기 
 10. [✔] 해시태그 구현 --> next는 동적 주소 불가: express + next 구현 
 11. [✔] 해시태그 검색기능
 12. [✔] 해시태그 정규표현식 수정 `ex) #오렌지<li>#사과</li>`  --> https://regexr.com
 13. 게시글 검색기능 
 14. [✔] DB 연동 (=Sequalize)
-15. 
 16. [✔] NextJS에서 markdown으로 작성한 콘텐츠를 보여주는 방법 --> https://growd.tistory.com/78
 17. [✔] React Nextjs에서 tui.editor 사용하기 ("@toast-ui/react-editor": "^2.0.1",) 📌
 - https://github.com/myeongjae-kim/tui.editor-with-nextjs
