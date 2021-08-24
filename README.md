@@ -22,8 +22,9 @@
 21. 트리구조 페이지 (=컨플루언스)
 22. footer 제작 (=toss-tech)
 23. 시간지나면, 게시글 자동저장 & 임시저장 
-24. [✔] MD Viewer
-25. HTML Viewer
-26. Excel Viewer
-27. SSR 적용 
-28. AWS 호스팅
+24. 비밀글 (=검색봇이 못 긁어가도록)
+25. [✔] MD Viewer
+26. HTML Viewer
+27. Excel Viewer
+28. SSR 적용 
+29. AWS 호스팅
