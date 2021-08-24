@@ -25,8 +25,9 @@
 24. 비밀글 (=검색봇이 못 긁어가도록)
 25. 팀 위키 vs 개인 위키 (=본인만 보이도록)
 26. 렌더링 최적화 (=속도 문제 개선)
-27. [✔] MD Viewer
-28. HTML Viewer
-29. Excel Viewer
-30. SSR 적용 
-31. AWS 호스팅
+27. 깃허브 연동 (=단군 소프트 help) 
+28. [✔] MD Viewer
+29. HTML Viewer
+30. Excel Viewer
+31. SSR 적용 
+32. AWS 호스팅
