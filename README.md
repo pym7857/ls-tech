@@ -23,8 +23,9 @@
 22. footer 제작 (=toss-tech)
 23. 시간지나면, 게시글 자동저장 & 임시저장 
 24. 비밀글 (=검색봇이 못 긁어가도록)
-25. [✔] MD Viewer
-26. HTML Viewer
-27. Excel Viewer
-28. SSR 적용 
-29. AWS 호스팅
+25. 팀 위키 vs 개인 위키 
+26. [✔] MD Viewer
+27. HTML Viewer
+28. Excel Viewer
+29. SSR 적용 
+30. AWS 호스팅
