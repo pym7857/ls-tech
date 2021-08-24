@@ -20,8 +20,9 @@
 19. 글 수정 기능 
 20. 페이지네이션 제작 
 21. 트리구조 페이지 (=컨플루언스)
-22. [✔] MD Viewer
-23. HTML Viewer
-24. Excel Viewer
-25. SSR 적용 
-26. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
+22. footer 제작 (=toss-tech)
+23. [✔] MD Viewer
+24. HTML Viewer
+25. Excel Viewer
+26. SSR 적용 
+27. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
