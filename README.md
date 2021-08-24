@@ -21,8 +21,9 @@
 20. 페이지네이션 제작 
 21. 트리구조 페이지 (=컨플루언스)
 22. footer 제작 (=toss-tech)
-23. [✔] MD Viewer
-24. HTML Viewer
-25. Excel Viewer
-26. SSR 적용 
-27. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
+23. 시간지나면, 게시글 자동저장 & 임시저장 
+24. [✔] MD Viewer
+25. HTML Viewer
+26. Excel Viewer
+27. SSR 적용 
+28. AWS 호스팅
