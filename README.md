@@ -20,5 +20,6 @@
 - https://github.com/myeongjae-kim/tui.editor-with-nextjs
 - https://myeongjae.kim/blog/2020/04/05/tui-editor-with-nextjs
 18. 닉네임, 비밀번호 변경 기능 
-19. SSR 적용 
-20. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
+19. MD Viewer, HTML Viewer, Excel Viewer
+20. SSR 적용 
+21. AWS 호스팅 (회사 local서버 쓰면, 서버컴 끄면 세션 날아감) 
