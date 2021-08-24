@@ -12,7 +12,7 @@
 12. [✔] 해시태그 정규표현식 수정 `ex) #오렌지<li>#사과</li>`  --> https://regexr.com
 13. 게시글 검색기능 
 14. [✔] DB 연동 (=Sequalize)
-15. React + Marked + Highlight --> https://codesandbox.io/s/6zxq4wkyln?file=/src/index.js
+15. 
 16. [✔] NextJS에서 markdown으로 작성한 콘텐츠를 보여주는 방법 --> https://growd.tistory.com/78
 17. [✔] React Nextjs에서 tui.editor 사용하기 ("@toast-ui/react-editor": "^2.0.1",) 📌
 - https://github.com/myeongjae-kim/tui.editor-with-nextjs
