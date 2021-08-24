@@ -4,66 +4,13 @@ import PropTypes from 'prop-types';
 import { Icon, Card, Avatar, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import marked from 'marked';
-import DOMPurify from "dompurify";
-
-import 'highlight.js/styles/default.css';
-import hljs from 'highlight.js';
-
-
-import {
-    LIKE_POST_REQUEST,
-    UNLIKE_POST_REQUEST,
-  } from '../reducers/post';
+import "@uiw/react-md-editor/dist/markdown-editor.css";
+import "@uiw/react-markdown-preview/dist/markdown.css";
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const ArticleCard = ({ article }) => {
     const { me } = useSelector(state => state.user);
     const dispatch = useDispatch();
-
-    const liked = me && article.Likers && article.Likers.find(v => v.id === me.id); // 좋아요 누른 상태 
-
-    //console.log('liked:', liked);
-
-    const onToggleLike = useCallback(() => {
-        if (!me) {
-            return alert('로그인이 필요합니다!');
-        }
-        if (liked) { // 좋아요 누른 상태에서, 하트를 한번 더 누르면 
-            dispatch({
-                type: UNLIKE_POST_REQUEST,
-                data: article.id,
-            });
-        } else { // 좋아요 안 누른 상태에서, 하트를 누르면 
-            dispatch({
-                type: LIKE_POST_REQUEST,
-                data: article.id,
-            });
-        }
-    }, [me && me.id, article && article.id, liked]);
-
-    // markdown 형식 -> 일반 글 형식 
-    const PreviewPanel = (props) => { // article.content   ex) <p>해시태그도 써볼까</p><ul><li>#md성공 #md</li><li>될까?</li></ul>
-        // source : https://marked.js.org/using_advanced#options
-        marked.setOptions({ 
-            highlight: function(code, lang) {
-                return hljs.highlight(lang, code).value;
-            },
-            renderer: new marked.Renderer(), // An object containing functions to render tokens to HTML. See extensibility for more details. 
-            gfm: true, // If true, use approved GitHub Flavored Markdown (GFM) specification.
-            breaks: true, // If true, add <br> on a single line break (copies GitHub behavior on comments, but not on rendered markdown files). Requires gfm be true.
-        });
-
-        const output = DOMPurify.sanitize(marked(props.mdText));
-        console.log('output: ', output); // output:  <p><a href="httht">httht</a></p>
-        return (
-            <div 
-                id='preview' 
-                dangerouslySetInnerHTML= {{__html: output}}
-            />
-        );
-    }
-
-    //console.log('(article card) article:', article);
 
     return ( // 해당 제목에 해당하는 게시글 보여줌 
         <div>
@@ -72,15 +19,6 @@ const ArticleCard = ({ article }) => {
                     key={+article.createdAt}
                     title={article.title} 
                     bordered={false} 
-                    actions={[
-                        <Icon 
-                            type="heart" 
-                            key="heart"
-                            theme={liked ? 'twoTone' : 'outlined'}
-                            twoToneColor="#eb2f96"
-                            onClick={onToggleLike} 
-                        />
-                    ]}
                 >
                     <Card.Meta
                         avatar={(
@@ -92,7 +30,10 @@ const ArticleCard = ({ article }) => {
                         description={(
                             <div>
                                 <div>
-                                    <PreviewPanel mdText={article.content}/>
+                                    <MarkdownPreview 
+                                        source={article.content} 
+                                        style={{ color: 'black' }}
+                                    />
                                 </div>
 
                                 <hr />

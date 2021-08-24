@@ -32,19 +32,9 @@ const LoginForm = () => {
 
     return (
         <Form onSubmit={onSubmitForm} style={{ padding: '10px' }}>
-            <div>
-                <label htmlFor="user-id">아이디</label>
-                <br />
-                <Input name="user-id" value={id} onChange={onChangeId} required />
-            </div>
-            <div>
-                <label htmlFor="user-password">비밀번호</label>
-                <br />
-                <Input name="user-password" type="password" value={password} onChange={onChangePassword} required />
-            </div>
-            <div style={{ marginTop: '10px' }}>
+                <Input placeholder="아이디" style={{ width: '150px', marginRight: '5px' }} name="user-id" value={id} onChange={onChangeId} required />
+                <Input placeholder="비밀번호" style={{ width: '150px', marginRight: '5px' }} name="user-password" type="password" value={password} onChange={onChangePassword} required />
                 <Button type="primary" htmlType="submit" loading={isLoggingIn}>로그인</Button>
-            </div>
         </Form>
     );
 };

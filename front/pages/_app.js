@@ -11,7 +11,8 @@ import AppLayout from '../components/AppLayout';
 import reducer from '../reducers';
 import rootSaga from '../sagas';
 
-import '../styles/globals.css';
+import 'codemirror/lib/codemirror.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
 
 const LsTech = ({ Component, store, pageProps  }) => { // Component: next에서 넣어주는 props,   store: state, action, reducer가 합쳐진 것 
     return (
