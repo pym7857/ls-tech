@@ -18,7 +18,7 @@
 - [ ] 닉네임, 비밀번호 변경 기능 
 - [ ] 글 수정 기능 
 - [ ] 게시글 검색기능 
-- [ ] floating button --> https://www.npmjs.com/package/react-floating-action-button
+- [ ] floating button --> 상태좋은 라이브러리 없음 
 - [ ] 페이지네이션 제작 
 - [ ] 트리구조 페이지 (=컨플루언스) --> 모달창 제작
 - [ ] footer 제작 (=toss-tech)
