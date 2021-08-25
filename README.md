@@ -10,24 +10,24 @@
 10. [✔] 해시태그 구현 --> next는 동적 주소 불가: express + next 구현 
 11. [✔] 해시태그 검색기능
 12. [✔] 해시태그 정규표현식 수정 `ex) #오렌지<li>#사과</li>`  --> https://regexr.com
-13. 게시글 검색기능 
 14. [✔] DB 연동 (=Sequalize)
 16. [✔] NextJS에서 markdown으로 작성한 콘텐츠를 보여주는 방법 --> https://growd.tistory.com/78
 17. [✔] React Nextjs에서 tui.editor 사용하기 ("@toast-ui/react-editor": "^2.0.1",) 📌
 - https://github.com/myeongjae-kim/tui.editor-with-nextjs
 - https://myeongjae.kim/blog/2020/04/05/tui-editor-with-nextjs
 18. 닉네임, 비밀번호 변경 기능 
-19. 글 수정 기능 
-20. 페이지네이션 제작 
-21. 트리구조 페이지 (=컨플루언스)
-22. footer 제작 (=toss-tech)
-23. 시간지나면, 게시글 자동저장 & 임시저장 
-24. 비밀글 (=검색봇이 못 긁어가도록)
-25. 팀 위키 vs 개인 위키 (=본인만 보이도록)
-26. 렌더링 최적화 (=속도 문제 개선)
-27. 깃허브 연동 (=단군 소프트 help) 
-28. [✔] MD Viewer
-29. HTML Viewer
-30. Excel Viewer
-31. SSR 적용 
-32. AWS 호스팅
+20. 글 수정 기능 
+21. 게시글 검색기능 
+22. 페이지네이션 제작 
+23. 트리구조 페이지 (=컨플루언스)
+24. footer 제작 (=toss-tech)
+25. 시간지나면, 게시글 자동저장 & 임시저장 
+26. 비밀글 (=검색봇이 못 긁어가도록)
+27. 팀 위키 vs 개인 위키 (=본인만 보이도록)
+28. 렌더링 최적화 (=속도 문제 개선)
+29. 깃허브 연동 (=단군 소프트 help) 
+30. [✔] MD Viewer
+31. HTML Viewer
+32. Excel Viewer
+33. SSR 적용 
+34. AWS 호스팅
