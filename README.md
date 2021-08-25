@@ -25,10 +25,10 @@
 - [ ] 시간지나면, 게시글 자동저장 & 임시저장 
 - [ ] 비밀글 (=검색봇이 못 긁어가도록) --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
 - [ ] 팀 위키 vs 개인 위키 (=본인만 보이도록)
-- [ ] 렌더링 최적화 (=속도 문제 개선)
 - [ ] 깃허브 연동 (=단군 소프트 help) 
 - [x] MD Viewer
 - [ ] HTML Viewer
 - [ ] Excel Viewer
 - [ ] SSR 적용 
+- [ ] 렌더링 최적화 (=속도 문제 개선)
 - [ ] AWS 호스팅
