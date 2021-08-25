@@ -13,6 +13,7 @@ import rootSaga from '../sagas';
 
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import './Paging.css';
 
 const LsTech = ({ Component, store, pageProps  }) => { // Component: next에서 넣어주는 props,   store: state, action, reducer가 합쳐진 것 
     return (

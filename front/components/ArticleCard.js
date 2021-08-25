@@ -30,6 +30,9 @@ const ArticleCard = ({ article }) => {
                         description={(
                             <div>
                                 <div>
+                                    {article.createdAt.split('T')[0]}
+                                    <br />
+                                    <br />
                                     <MarkdownPreview 
                                         source={article.content} 
                                         style={{ color: 'black' }}

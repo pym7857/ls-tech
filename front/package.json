@@ -31,6 +31,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-js-pagination": "^3.0.3",
     "react-markdown": "^7.0.0",
     "react-redux": "^7.1.0-alpha.4",
     "redux": "^4.1.1",
@@ -38,15 +39,16 @@
     "style-loader": "^3.2.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.24.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "nodemon": "^1.19.0",
-    "webpack": "^4.43.0",
-    "@types/node": "^12.12.21",
-    "@types/react": "^16.9.16",
-    "@types/react-dom": "^16.9.4",
-    "typescript": "3.7.3"
+    "typescript": "^3.7.3",
+    "webpack": "^4.43.0"
   }
 }
