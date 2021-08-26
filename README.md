@@ -15,7 +15,7 @@
 - [x] React Nextjs에서 tui.editor 사용하기 ("@toast-ui/react-editor": "^2.0.1",) 📌
   - https://github.com/myeongjae-kim/tui.editor-with-nextjs
   - https://myeongjae.kim/blog/2020/04/05/tui-editor-with-nextjs
-- [] 닉네임 변경 (비밀번호 변경 X --> me객체) 
+- [x] 닉네임 변경 (비밀번호 변경 X --> me객체) 
 - [ ] 글 수정 기능 
 - [ ] 게시글 검색기능 
 - [ ] floating button --> 상태좋은 라이브러리 없음 
