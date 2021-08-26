@@ -16,16 +16,16 @@
   - https://github.com/myeongjae-kim/tui.editor-with-nextjs
   - https://myeongjae.kim/blog/2020/04/05/tui-editor-with-nextjs
 - [x] 닉네임 변경 (비밀번호 변경 X --> me객체) 
-- [ ] 글 수정 기능 
-- [ ] 게시글 검색기능 
-- [ ] floating button --> 상태좋은 라이브러리 없음 
-- [ ] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
-- [ ] 트리구조 페이지 (=컨플루언스) --> 모달창 제작
+- [ ] ✔ 글 수정 기능 
+- [ ] ✔ 게시글 검색기능 
+- [x] floating button --> 상태좋은 라이브러리 없음 --> 제작 X
+- [ ] ✔ 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
+- [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 제작
 - [x] footer 제작 (=toss-tech) --> 불가능 --> 페이지 3구역으로 나눠놨음 
-- [ ] 시간지나면, 게시글 자동저장 & 임시저장 
-- [ ] 비밀글 (=검색봇이 못 긁어가도록) --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
-- [ ] 팀 위키 vs 개인 위키 (=본인만 보이도록)
-- [ ] 깃허브 연동 (=단군 소프트 help) 
+- [ ] ✔ 시간지나면, 게시글 자동저장 & 임시저장 
+- [ ] ✔ 비밀글 (=검색봇이 못 긁어가도록) --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
+- [ ] ✔ 팀 위키 vs 개인 위키 (=본인만 보이도록)
+- [ ] ✔ 깃허브 연동 (=단군 소프트 help) 
 - [x] MD Viewer
 - [ ] HTML Viewer
 - [ ] Excel Viewer
