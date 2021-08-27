@@ -17,6 +17,7 @@
   - https://myeongjae.kim/blog/2020/04/05/tui-editor-with-nextjs
 - [x] 닉네임 변경 (비밀번호 변경 X --> me객체) 
 - [x] 글 수정 기능   
+- [ ] 글 수정 버튼 --> 글쓴이에게만 보이는 로직 --> 삼항연산자 --> 왜 안됨?  
 - [ ] ✔ 게시글 검색기능 
 - [x] floating button --> 상태좋은 라이브러리 없음 --> 제작 X
 - [x] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
