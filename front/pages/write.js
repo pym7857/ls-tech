@@ -20,6 +20,7 @@ export default function Write() {
   useEffect(() => {
     setTitleText(JSON.parse(window.localStorage.getItem("titleText")) || '');
     setSubTitleText(JSON.parse(window.localStorage.getItem("subTitleText")) || '');
+    setText(JSON.parse(window.localStorage.getItem("text")) || '');
   }, []);
   
   // 이 방법도 가능 
@@ -62,13 +63,22 @@ export default function Write() {
     setSubTitleText(e.target.value);
     localStorage.setItem('subTitleText', JSON.stringify(e.target.value))
   }, []);
+  const onChangeText = useCallback((value) => {
+    setText(value);
+    localStorage.setItem('text', JSON.stringify(value))
+  }, []);
 
   return (
     <Form style={{ margin: '10px 0 20px' }} encType="multipart/form-data" onSubmit={onSubmitForm}>
         <h1>Hello Next.js 👋</h1>
         <Input.TextArea maxLength={50} placeholder="제목을 적어주세요" value={titleText} onChange={onChangeTitleText} style={{ height: '30px' }} />
         <Input.TextArea maxLength={100} placeholder="소제목을 적어주세요" value={subTitleText} onChange={onChangeSubTitleText} style={{ height: '30px' }} />
-        <WysiwygEditor onChange={(value) => setText(value)} />
+        <WysiwygEditor 
+          initialValue={text}
+          onChange={
+            onChangeText
+          } 
+        />
         <br />
         <div style={{ textAlign: 'center' }} >
           <Button htmlType="submit" loading={isAddingPost}>Submit</Button>

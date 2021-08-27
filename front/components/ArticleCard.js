@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Icon, Card, Avatar, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import gravatar from 'gravatar';
+import styled from 'styled-components';
+import { TagsFilled } from '@ant-design/icons';
 
 import "@uiw/react-md-editor/dist/markdown-editor.css";
 import "@uiw/react-markdown-preview/dist/markdown.css";
@@ -19,6 +21,18 @@ const ArticleCard = ({ article }) => {
         gravatarEmail = article.User.nickname + '@gmail.com';
     }
     //console.log(gravatarEmail);
+
+    const HashTagWrapper = styled.button`
+        border: 1px solid #e6e6e6;
+        border-radius: 3px;
+        color: grey;
+        background-color: #e6e6e6;
+
+        &:hover {
+            text-decoration:underline;
+            cursor: pointer;
+        }
+    `;
 
     return ( // 해당 제목에 해당하는 게시글 보여줌 
         <div>
@@ -54,13 +68,20 @@ const ArticleCard = ({ article }) => {
 
                                 <hr />
 
+                                <TagsFilled style={{ fontSize: '20px' }} />
+                                {'\u00A0'}
                                 {article.content.split(/(#[^\s]+)/g).map((v) => {
                                     // 해시태그인 애들은 Link로 감싸준다 
                                     if (v.match(/(#[\S]+)/)) { // ex) #사과<li>
                                         //console.log(v.split('<')[0].slice(1));
                                         return (
                                             <Link href={{ pathname: '/hashtag', query: { tag: v.split('<')[0].slice(1) } }} as={`/hashtag/${v.split('<')[0].slice(1)}`} key={v}>
-                                                <a style={{ color: '#3f729b' }}>#{v.split('<')[0].slice(1)} </a>
+                                                <a style={{ color: '#3f729b' }}>
+                                                    <HashTagWrapper>
+                                                        {v.split('<')[0].slice(1)} 
+                                                    </HashTagWrapper>
+                                                    {'\u00A0'}
+                                                </a>
                                             </Link>
                                         );
                                     }
