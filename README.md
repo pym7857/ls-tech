@@ -20,9 +20,10 @@
 - [ ] ✔ 글 수정 버튼 보이는 범위 --> 글쓴이에게만 보이는 로직 --> 삼항연산자 --> 왜 안됨??
 - [x] floating button --> 상태좋은 라이브러리 없음 --> 제작 X
 - [x] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
-- [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 제작
-- [ ] ✔ 팀 페이지 + 개인 페이지
-- [ ] ✔ 비밀글 (=검색봇이 못 긁어가도록) --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
+- [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 띄우기 
+  - 팀 페이지 + 개인 페이지
+- [ ] ✔ 검색봇이 긁어갈 수 있는 범위 설정 --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
+- [ ] ✔ `비밀글` 선택/비선택
 - [x] footer 제작 (=toss-tech) --> 불가능 --> 페이지 3구역으로 나눠놨음 
 - [ ] ✔ 시간지나면, 게시글 자동저장 & 임시저장 --> 어떻게 구현?? 검색해도 안뜸 
 - [ ] ✔ 깃허브 연동 (=단군 소프트 help) 
