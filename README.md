@@ -20,7 +20,6 @@
 - [x] 글 수정 버튼 보이는 범위 --> 글쓴이에게만 보이는 로직
 - [x] floating button --> 상태좋은 라이브러리 없음 --> 제작 X
 - [x] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
-- [ ] ✔ 프로필 사진 수정 기능
 - [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 띄우기 
   - 팀 페이지 + 개인 페이지
   - Workspace와 Channel은 layout에 들어가야됨
@@ -29,11 +28,12 @@
 - [x] footer 제작 (=toss-tech) --> 불가능 --> 페이지 3구역으로 나눠놨음 
 - [ ] ✔ 시간지나면, 게시글 자동저장 & 임시저장 --> 어떻게 구현?? 검색해도 안뜸 
 - [ ] ✔ 깃허브 연동 (=단군 소프트 help) 
-- [ ] ✔ 게시글 검색기능 (=반응형)  --> 시간 남으면 마지막에 만들기 --> AppLayout과 index.js 상태를 어떻게 연결..????
+- [ ] 게시글 검색기능 (=반응형)  --> 시간 남으면 마지막에 만들기 --> AppLayout과 index.js 상태를 어떻게 연결..????
+- [ ] 프로필 사진 수정 기능 --> 시간 남으면 만들기 
 - [x] MD Viewer
 - [ ] HTML Viewer
 - [ ] Excel Viewer
 - [ ] SSR 적용 
 - [ ] 렌더링 최적화 (=속도 문제 개선)
-- [ ] Next Code splitting --> next/dynamic --> 현재 Home에만 적용해놓음
+- [ ] ✔ Next Code splitting --> next/dynamic --> 현재 Home에만 적용해놓음
 - [ ] AWS 호스팅
