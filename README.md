@@ -31,6 +31,7 @@
   - `redux-persist` 쓰면 안됨. 내가 바꾸려는건 글쓰기 text임. 이건 reducer에서 가져오는게 아님 
   - `redux-persist` 놀라운 오류 해결 --> https://github.com/rt2zz/redux-persist/issues/826#issuecomment-410146610
   - JS localStorage 사용하자 (window.localStorage)
+  - useEffect()로 웹 스토리지에 상태 저장하기: https://www.daleseo.com/react-hooks-use-web-storage/ 
   - Next.js에서 window 사용 불가한 이유: https://sumini.dev/issue/000-nextjs-window,document-is-not-defined/  
 - [ ] ✔ 깃허브 연동 (=단군 소프트 help) 
 - [ ] 🙄 게시글 검색기능 (=반응형)  --> 시간 남으면 마지막에 만들기 --> AppLayout과 index.js 상태를 어떻게 연결..????
