@@ -25,6 +25,7 @@
   - Workspace와 Channel은 layout에 들어가야됨
 - [ ] ✔ 검색봇이 긁어갈 수 있는 범위 설정 --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
 - [ ] ✔ `비밀글` 선택/비선택
+- [ ] ✔ 글 공유 기능 
 - [x] footer 제작 (=toss-tech) --> 불가능 --> 페이지 3구역으로 나눠놨음 
 - [ ] ✔ 시간지나면, 게시글 자동저장 & 임시저장 
   - 서버 갔다오면 안됨. front에서 session에 가지고 있어야됨 
