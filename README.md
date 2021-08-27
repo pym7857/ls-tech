@@ -17,11 +17,12 @@
   - https://myeongjae.kim/blog/2020/04/05/tui-editor-with-nextjs
 - [x] 닉네임 변경 (비밀번호 변경 X --> me객체) 
 - [x] 글 수정 기능   
-- [ ] ✔ 글 수정 버튼 보이는 범위 --> 글쓴이에게만 보이는 로직 --> 삼항연산자 --> 왜 안됨??
+- [x] ✔ 글 수정 버튼 보이는 범위 --> 글쓴이에게만 보이는 로직
 - [x] floating button --> 상태좋은 라이브러리 없음 --> 제작 X
 - [x] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
 - [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 띄우기 
   - 팀 페이지 + 개인 페이지
+  - Workspace와 Channel은 layout에 들어가야됨
 - [ ] ✔ 검색봇이 긁어갈 수 있는 범위 설정 --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
 - [ ] ✔ `비밀글` 선택/비선택
 - [x] footer 제작 (=toss-tech) --> 불가능 --> 페이지 3구역으로 나눠놨음 
