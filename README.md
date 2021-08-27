@@ -27,7 +27,7 @@
 - [ ] ✔ `비밀글` 선택/비선택
 - [ ] ✔ 글 공유 기능 
 - [x] footer 제작 (=toss-tech) --> 불가능 --> 페이지 3구역으로 나눠놨음 
-- [ ] ✔ 시간지나면, 게시글 자동저장 & 임시저장 
+- [x] 시간지나면, 게시글 자동저장 & 임시저장 
   - 서버 갔다오면 안됨. front에서 session에 가지고 있어야됨 
   - `redux-persist` 쓰면 안됨. 내가 바꾸려는건 글쓰기 text임. 이건 reducer에서 가져오는게 아님 
   - `redux-persist` 놀라운 오류 해결 --> https://github.com/rt2zz/redux-persist/issues/826#issuecomment-410146610
