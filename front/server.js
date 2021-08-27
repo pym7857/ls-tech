@@ -35,6 +35,11 @@ app.prepare().then(() => {
                                                                       // pages폴더의 hashtag.js와 연결해줌 
   });
 
+  server.patch('/edit/:id', (req, res) => {
+    return app.render(req, res, '/edit', { id: req.params.id }); // app은 next였음 (윗줄 참조)
+                                                                      // pages폴더의 hashtag.js와 연결해줌 
+  });
+
   server.get('/article/:id', (req, res) => {
     return app.render(req, res, '/article', { id: req.params.id }); 
                                                                   

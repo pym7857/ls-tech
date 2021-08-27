@@ -1,26 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PostCard from '../components/PostCard';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from "react-js-pagination";
 
-import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post';
+import {  LOAD_TARGET_POSTS_REQUEST } from '../reducers/post';
 
 const Home = () => {
-    const [page, setPage] = useState(1); 
+    const [page, setPage] = useState(1); // default: 1
     const { me } = useSelector(state => state.user);
     const { mainPosts } = useSelector(state => state.post);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch({
-            type: LOAD_MAIN_POSTS_REQUEST,
+            type: LOAD_TARGET_POSTS_REQUEST,
+            data: 1,
         });
     }, []);
 
-    const handlePageChange = (page) => { 
+    const handlePageChange = useCallback((page) => { 
         setPage(page); 
-        alert(page);
-    };
+        //alert(page);
+        dispatch({
+            type: LOAD_TARGET_POSTS_REQUEST,
+            data: page,
+        }, [page]);
+    }, [page]);
+
+    //console.log(mainPosts);
 
     return(
         <div>
@@ -32,7 +39,7 @@ const Home = () => {
             })}
             <Pagination 
                 activePage={page} 
-                itemsCountPerPage={10} 
+                itemsCountPerPage={5} 
                 totalItemsCount={450} 
                 pageRangeDisplayed={5} 
                 prevPageText={"‹"} 

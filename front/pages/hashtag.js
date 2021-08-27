@@ -17,7 +17,8 @@ const Hashtag = ({ tag }) => { // getInitialProps로부터 전달받은 props
     });
   }, []);
 
-  //console.log('hashtag mainPosts: ', mainPosts);
+  // 순서: 기존것 -> REQEUST -> SUCCESS 
+  console.log('hashtag mainPosts: ', mainPosts);
 
   return ( // 해당 해시태그 게시물 모두 보여줌 
     <div>

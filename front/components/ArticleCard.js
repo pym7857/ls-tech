@@ -12,6 +12,8 @@ const ArticleCard = ({ article }) => {
     const { me } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
+    console.log('article: ', article);
+
     return ( // 해당 제목에 해당하는 게시글 보여줌 
         <div>
             <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -60,6 +62,21 @@ const ArticleCard = ({ article }) => {
                     </Card.Meta>
                 </Card>
             </div>
+
+            <div>
+                { me.id && me.id === article.User.id
+                    ?
+                    <div style={{ float: 'right' }} >
+                        <Link href={{ pathname: '/edit', query: { id: article.id } }} as={`/edit/${article.id}`} key={article.id}>
+                            <a><Button type="primary">글 수정</Button></a>
+                        </Link>
+                    </div>  
+                    :
+                    <div>
+                    </div>
+                }
+            </div>
+
         </div>
     );
 };

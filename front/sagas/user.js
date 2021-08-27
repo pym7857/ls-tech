@@ -10,6 +10,9 @@ import {
   LOG_OUT_FAILURE,
   LOG_OUT_REQUEST,
   LOG_OUT_SUCCESS,
+  EDIT_NICKNAME_FAILURE, 
+  EDIT_NICKNAME_REQUEST,
+  EDIT_NICKNAME_SUCCESS,
 } from '../reducers/user';
 
 function logInAPI(loginData) {
@@ -87,10 +90,37 @@ function* watchLoadUser() {
   yield takeEvery(LOAD_USER_REQUEST, loadUser);
 }
 
+function editNicknameAPI(nickname) {
+  // 서버에 요청을 보내는 부분
+  return axios.patch('/user/nickname', { nickname }, {
+    withCredentials: true,
+  });
+}
+function* editNickname(action) {
+  try {
+    // yield call(loadFollowersAPI);
+    const result = yield call(editNicknameAPI, action.data);
+    yield put({ // put은 dispatch 동일
+      type: EDIT_NICKNAME_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) { // loginAPI 실패
+    console.error(e);
+    yield put({
+      type: EDIT_NICKNAME_FAILURE,
+      error: e,
+    });
+  }
+}
+function* watchEditNickname() {
+  yield takeEvery(EDIT_NICKNAME_REQUEST, editNickname);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
     fork(watchLogOut),
     fork(watchLoadUser),
+    fork(watchEditNickname),
   ]);
 }

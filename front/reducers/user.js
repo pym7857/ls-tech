@@ -99,6 +99,30 @@ const reducer = (state = initialState, action) => {
             },
           };
         }
+        case EDIT_NICKNAME_REQUEST: {
+          return {
+            ...state,
+            isEditingNickname: true,
+            editNicknameErrorReason: '',
+          };
+        }
+        case EDIT_NICKNAME_SUCCESS: {
+          return {
+            ...state,
+            isEditingNickname: false,
+            me: {
+              ...state.me,
+              nickname: action.data,
+            },
+          };
+        }
+        case EDIT_NICKNAME_FAILURE: {
+          return {
+            ...state,
+            isEditingNickname: false,
+            editNicknameErrorReason: action.error,
+          };
+        }
         default: {
             return {
                 ...state,

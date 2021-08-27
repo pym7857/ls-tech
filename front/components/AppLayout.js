@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Menu, Input, Row, Col, Dropdown, Icon, message } from 'antd';
 import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
-import UserProfile from './UserProfile';
+
 import { LOAD_USER_REQUEST } from '../reducers/user';
 import { LOAD_ALL_HASHTAGS_REQUEST } from '../reducers/post';
 import { LOG_OUT_REQUEST } from '../reducers/user';
@@ -13,30 +13,6 @@ const AppLayout = ({ children }) => {
     const { me } = useSelector(state => state.user);
     const { hashTags } = useSelector(state => state.post);
     const dispatch = useDispatch();
-
-    const onLogout = useCallback(() => {
-        dispatch({
-          type: LOG_OUT_REQUEST,
-        });
-      }, []);
-
-    function handleButtonClick(e) {
-        //message.info('Click on left button.');
-        console.log('click left button', e);
-    }
-    function handleMenuClick(e) {
-        //message.info('Click on menu item.');
-        console.log('click', e);
-    }
-
-    const menu = (
-        <Menu onClick={onLogout}>
-            <Menu.Item key="1">
-                <Icon type="user" />
-                    로그아웃
-                </Menu.Item>
-        </Menu>
-      );
 
     useEffect(() => {
         if (!me) {
@@ -49,7 +25,27 @@ const AppLayout = ({ children }) => {
         });
     }, []);
 
-    //console.log(hashTags);
+    const IconFont = Icon.createFromIconfontCN({
+        scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
+      });
+
+    const onLogout = useCallback(() => {
+        dispatch({
+          type: LOG_OUT_REQUEST,
+        });
+      }, []);
+
+    const menu = (
+        <Menu>
+            <Menu.Item key="1">
+                <Link href="/profile"><a><Icon type="user" /> 프로필 수정</a></Link>
+            </Menu.Item>
+            <Menu.Item key="2" onClick={onLogout}>
+                <IconFont type="icon-tuichu" />
+                    로그아웃
+            </Menu.Item>
+        </Menu>
+      );
 
     return (
         <div>
@@ -62,7 +58,7 @@ const AppLayout = ({ children }) => {
                 {me 
                     ? <Menu.Item key="menu" style={{ float: 'right' }} >
                         <div id="components-dropdown-demo-dropdown-button">
-                            <Dropdown.Button onClick={handleButtonClick} overlay={menu}>
+                            <Dropdown.Button overlay={menu}>
                                 {me.nickname}
                             </Dropdown.Button>
                         </div>

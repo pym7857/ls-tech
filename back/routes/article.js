@@ -25,6 +25,6 @@ router.get('/:id', async (req, res, next) => { // GET /api/post/1
         console.error(e);
         next(e);
     }
-    });
+});
   
 module.exports = router;

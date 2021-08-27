@@ -1,4 +1,4 @@
-import { all, fork, takeLatest, put, delay, call } from 'redux-saga/effects';
+import { all, fork, takeLatest, takeEvery, put, delay, call } from 'redux-saga/effects';
 import axios from 'axios';
 import {
   ADD_POST_FAILURE,
@@ -13,6 +13,9 @@ import {
   LOAD_MAIN_POSTS_FAILURE,
   LOAD_MAIN_POSTS_REQUEST,
   LOAD_MAIN_POSTS_SUCCESS,
+  LOAD_TARGET_POSTS_FAILURE,
+  LOAD_TARGET_POSTS_REQUEST,
+  LOAD_TARGET_POSTS_SUCCESS,
   LOAD_USER_POSTS_FAILURE,
   LOAD_USER_POSTS_REQUEST,
   LOAD_USER_POSTS_SUCCESS, 
@@ -25,6 +28,9 @@ import {
   LOAD_ARTICLE_FAILURE,
   LOAD_ARTICLE_REQUEST,
   LOAD_ARTICLE_SUCCESS,
+  EDIT_POST_FAILURE,
+  EDIT_POST_REQUEST,
+  EDIT_POST_SUCCESS,
 } from '../reducers/post';
 import { ADD_POST_TO_ME } from '../reducers/user';
 
@@ -36,7 +42,6 @@ function addPostAPI(postData) {
 function* addPost(action) {
   try {
     const result = yield call(addPostAPI, action.data);
-    console.log(result);
     yield put({ // post reducer의 데이터를 수정 
       type: ADD_POST_SUCCESS,
       data: result.data,
@@ -202,7 +207,7 @@ function* loadArticle(action) {
     const result = yield call(loadArticleAPI, action.data);
     yield put({
       type: LOAD_ARTICLE_SUCCESS,
-      data: result.data, // article 
+      data: result.data, // article 한개 
     });
   } catch (e) {
     yield put({
@@ -215,6 +220,53 @@ function* watchLoadArticle() {
   yield takeLatest(LOAD_ARTICLE_REQUEST, loadArticle);
 }
 
+function loadTargetPostsAPI(page) {
+  return axios.get(`/posts/${page}`);
+}
+function* loadTargetPosts(action) {
+  try {
+    const result = yield call(loadTargetPostsAPI, action.data);
+    yield put({
+      type: LOAD_TARGET_POSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: LOAD_TARGET_POSTS_FAILURE,
+      error: e,
+    });
+  }
+}
+function* watchLoadTargetPosts() {
+  yield takeLatest(LOAD_TARGET_POSTS_REQUEST, loadTargetPosts);
+}
+
+function editPostAPI(editData) {
+  // 서버에 요청을 보내는 부분
+  return axios.patch(`/post/edit/${editData.postId}`, editData, { // req.body를 editedData가 아닌, editedData.editedPost로 보내면 Object객체로 보내짐 (=오류) 
+    withCredentials: true,
+  });
+}
+function* editPost(action) {
+  try {
+    // yield call(loadFollowersAPI);
+    const result = yield call(editPostAPI, action.data);
+    yield put({ // put은 dispatch 동일
+      type: EDIT_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) { // loginAPI 실패
+    console.error(e);
+    yield put({
+      type: EDIT_POST_FAILURE,
+      error: e,
+    });
+  }
+}
+function* watchEditPost() {
+  yield takeEvery(EDIT_POST_REQUEST, editPost);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadMainPosts),
@@ -225,5 +277,7 @@ export default function* postSaga() {
     fork(watchUnlikePost),
     fork(watchLoadAllHashtags),
     fork(watchLoadArticle),
+    fork(watchLoadTargetPosts),
+    fork(watchEditPost),
   ]);
 }

@@ -4,37 +4,9 @@ import PropTypes from 'prop-types';
 import { Icon, Card, Avatar } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  LIKE_POST_REQUEST,
-  UNLIKE_POST_REQUEST,
-} from '../reducers/post';
-
 const PostCard = ({ post }) => {
     const { me } = useSelector(state => state.user);
     const dispatch = useDispatch();
-
-    const liked = me && post.Likers && post.Likers.find(v => v.id === me.id); // 좋아요 누른 상태 
-
-    //console.log('liked:', liked);
-
-    const onToggleLike = useCallback(() => {
-        if (!me) {
-            return alert('로그인이 필요합니다!');
-        }
-        if (liked) { // 좋아요 누른 상태에서, 하트를 한번 더 누르면 
-            dispatch({
-                type: UNLIKE_POST_REQUEST,
-                data: post.id,
-            });
-        } else { // 좋아요 안 누른 상태에서, 하트를 누르면 
-            dispatch({
-                type: LIKE_POST_REQUEST,
-                data: post.id,
-            });
-        }
-    }, [me && me.id, post && post.id, liked]);
-
-    //console.log('(postCard) post:', post);
 
     return (
         <div>

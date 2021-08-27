@@ -31,9 +31,7 @@ router.get('/:id', async (req, res, next) => { // GET /api/post/1
 /* 게시글 작성 라우터 */
 router.post('/', isLoggedIn, async (req, res, next) => { // POST /api/post
   try {
-    if (!req.user) {
-      return res.status(401).send('로그인이 필요합니다.');
-    }
+    //console.log('(1)---->', req.body);
     const hashtags = req.body.content.match(/(#[^\s]+)/g); 
     const newPost = await db.Post.create({
       title: req.body.title,
@@ -87,6 +85,23 @@ router.delete('/:id/like', isLoggedIn, async (req, res, next) => {
     }
     await post.removeLiker(req.user.id); // add, remove는 시퀄라이즈에서 제공 
     res.json({ userId: req.user.id });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+});
+
+/* 게시글 수정 라우터 */
+router.patch('/edit/:id/', isLoggedIn, async (req, res, next) => {
+  try {
+    //console.log('(2)----> ', req.body);
+    //console.log('(3)----> ', req.body.editedPost);
+    await db.Post.update({
+      content: req.body.editedPost,
+    }, {
+      where: { id: req.params.id },
+    });
+    res.send(req.body.editedPost);
   } catch (e) {
     console.error(e);
     next(e);

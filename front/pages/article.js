@@ -11,23 +11,23 @@ const Article = ({ id }) => { // getInitialProps로부터 전달받은 props
     const { article } = useSelector(state => state.post);
 
     useEffect(() => {
+        console.log('fff');
         dispatch({
-            type: LOAD_ARTICLE_REQUEST,
+            type: LOAD_ARTICLE_REQUEST, // id에 맞는 article하나 불러옴 
             data: id,
         });
     }, []);
 
-    //console.log('(pages)article: ', article);
+    // 순서: 기존것 -> REQUEST -> SUCCESS 
+    console.log('article: ', article);
 
-    return ( // 해당 제목에 해당하는 게시글 보여줌 
-        <div>
-            {article.map((c) => {
-                return (
-                    <ArticleCard key={c} article={c}/>
-                );
-            })}
-        </div>
-    );
+    return ( // 해당 해시태그 게시물 모두 보여줌 
+      <div>
+        {article.map(c => (
+          <ArticleCard key={c} article={c} />
+        ))}
+      </div>
+      );
 };
 
 Article.propTypes = {
