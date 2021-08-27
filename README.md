@@ -21,10 +21,10 @@
 - [x] floating button --> 상태좋은 라이브러리 없음 --> 제작 X
 - [x] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
 - [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 제작
-- [ ] ✔ 팀 페이지 vs 개인 페이지(=본인만 보이도록)
+- [ ] ✔ 팀 페이지 + 개인 페이지
+- [ ] ✔ 비밀글 (=검색봇이 못 긁어가도록) --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
 - [x] footer 제작 (=toss-tech) --> 불가능 --> 페이지 3구역으로 나눠놨음 
 - [ ] ✔ 시간지나면, 게시글 자동저장 & 임시저장 --> 어떻게 구현?? 검색해도 안뜸 
-- [ ] ✔ 비밀글 (=검색봇이 못 긁어가도록) --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
 - [ ] ✔ 깃허브 연동 (=단군 소프트 help) 
 - [ ] ✔ 게시글 검색기능 (=반응형)  --> 시간 남으면 마지막에 만들기
 - [x] MD Viewer
@@ -32,4 +32,5 @@
 - [ ] Excel Viewer
 - [ ] SSR 적용 
 - [ ] 렌더링 최적화 (=속도 문제 개선)
+- [ ] Code splitting
 - [ ] AWS 호스팅
