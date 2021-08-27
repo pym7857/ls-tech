@@ -30,7 +30,7 @@
   - 서버 갔다오면 안됨. front에서 session에 가지고 있어야됨 
   - `redux-persist` 쓰면 안됨. 내가 바꾸려는건 글쓰기 text임. 이건 reducer에서 가져오는게 아님 
   - `redux-persist` 놀라운 오류 해결 --> https://github.com/rt2zz/redux-persist/issues/826#issuecomment-410146610
-  - JS localStorage 사용하자 (window.localStorage)
+  - JS localStorage 사용하자 (window.localStorage) --> localStorage VS sessionStorage 
   - useEffect()로 웹 스토리지에 상태 저장하기: https://www.daleseo.com/react-hooks-use-web-storage/ 
   - Next.js에서 window 사용 불가한 이유: https://sumini.dev/issue/000-nextjs-window,document-is-not-defined/  
   - Next.js에서 window 사용 가능한 방법: https://velog.io/@sji7532/Next-Next%EC%97%90%EC%84%9C%EC%9D%98-alert-window-document-localStorage-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C
