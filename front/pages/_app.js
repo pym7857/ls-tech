@@ -23,7 +23,7 @@ const LsTech = ({ Component, store, pageProps  }) => { // Component: next에서 
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.17.0/antd.css" />
             </Head>
             <AppLayout>
-                <Component {...pageProps} />
+                    <Component {...pageProps} />
             </AppLayout>
         </Provider>
     );

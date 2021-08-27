@@ -94,10 +94,12 @@ router.delete('/:id/like', isLoggedIn, async (req, res, next) => {
 /* 게시글 수정 라우터 */
 router.patch('/edit/:id/', isLoggedIn, async (req, res, next) => {
   try {
-    //console.log('(2)----> ', req.body);
+    console.log('(2)----> ', req.body);
     //console.log('(3)----> ', req.body.editedPost);
     await db.Post.update({
-      content: req.body.editedPost,
+      title: req.body.editedObject.editedTitle,
+      subTitle: req.body.editedObject.editedSubTitle,
+      content: req.body.editedObject.editedContent,
     }, {
       where: { id: req.params.id },
     });

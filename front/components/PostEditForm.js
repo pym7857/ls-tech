@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
 
 import { EDIT_POST_REQUEST, LOAD_ARTICLE_REQUEST } from '../reducers/post';
+import WysiwygEditor from '../components/WysiwygEditor'
 
 const PostEditForm = ({ id }) => {
   const dispatch = useDispatch();
-  const [editedPost, setEditedPost] = useState('');
+  const [editedTitle, setEditedTitle] = useState('');
+  const [editedSubTitle, setEditedSubTitle] = useState('');
+  const [editedContent, setEditedContent] = useState('');
   const { isEditingPost } = useSelector(state => state.post);
   const { article } = useSelector(state => state.post);
 
@@ -18,34 +21,50 @@ const PostEditForm = ({ id }) => {
     });
   }, []);
 
-  const onChangePost = useCallback((e) => {
-    setEditedPost(e.target.value);
+  const onChangeTitle = useCallback((e) => {
+    setEditedTitle(e.target.value);
   }, []);
+  const onChangeSubTitle = useCallback((e) => {
+    setEditedSubTitle(e.target.value);
+  }, []);
+  // const onChangeContent = useCallback((e) => {
+  //   setEditedContent(e.target.value);
+  // }, []);
+
   const onEditPost = useCallback((e) => {
     e.preventDefault();
     dispatch({
       type: EDIT_POST_REQUEST, // postId, 수정된 게시글 --> 두개 보내야됨 
       data: {
         postId: id,
-        editedPost: editedPost,
+        editedObject: {
+          editedTitle: editedTitle,
+          editedSubTitle: editedSubTitle,
+          editedContent: editedContent,
+        }
       },
-    }, [editedPost]);
+    }, [editedTitle, editedSubTitle, editedContent]);
     Router.push('/');
-  }, [editedPost]);
+  }, [editedTitle, editedSubTitle, editedContent]);
 
-  console.log(editedPost);
+  //console.log(editedContent);
 
     return (
       <div>
         {article.map(c => (
           <Form onSubmit={onEditPost}>
               <div>
-                수정할 글 보이는곳 <br />
-                <Input value={editedPost || c.content} onChange={onChangePost}/>
+                <h1>Hello Next.js 👋</h1>
+                <Input.TextArea maxLength={50} placeholder="제목을 적어주세요" value={editedTitle || c.title} onChange={onChangeTitle} style={{ height: '30px' }} />
+                <Input.TextArea maxLength={100} placeholder="소제목을 적어주세요" value={editedSubTitle || c.subTitle} onChange={onChangeSubTitle} style={{ height: '30px' }} />
+                <WysiwygEditor initialValue={editedContent || c.content} onChange={(value) => setEditedContent(value)} />
               </div>
-              <Button type="primary" htmlType="submit" loading={isEditingPost} style={{ float: 'right' }} >
-                수정
-              </Button>
+              <br />
+              <div style={{ textAlign: 'center' }} >
+                <Button htmlType="submit" loading={isEditingPost} >
+                  Submit
+                </Button>
+              </div>
           </Form>
         ))}
       </div>

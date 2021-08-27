@@ -14,11 +14,18 @@ export default function Write() {
   const [text, setText] = useState('');
   const { isAddingPost, postAdded } = useSelector(state => state.post);
 
+  // 웹 스토리지는 오직 문자형(string) 데이터 타입만 지원하기 때문에 데이터를 쓰기 전에 
+  // JSON.stringify() 함수로 직렬화(serialization) 하고, 읽기 전에 JSON.parse() 함수로 역직렬화(deserialization) 해야함
+  
   useEffect(() => {
-    if (postAdded) {
-      setText('');
-    }
-  }, [postAdded]);
+    setTitleText(JSON.parse(window.localStorage.getItem("titleText")) || '');
+    setSubTitleText(JSON.parse(window.localStorage.getItem("subTitleText")) || '');
+  }, []);
+  
+  // 이 방법도 가능 
+  // useEffect(() => {
+  //   window.localStorage.setItem("titleText", JSON.stringify(titleText));
+  // }, [titleText]);
 
   const onSubmitForm = useCallback((e) => {
     e.preventDefault();
@@ -44,16 +51,16 @@ export default function Write() {
 
   console.log('text: ', text)
 
-  const onChangeText = useCallback((e) => {
-    setText(e.target.value);
-  }, []);
-
+  // const onChangeText = useCallback((e) => {
+  //   setText(e.target.value);
+  // }, []);
   const onChangeTitleText = useCallback((e) => {
     setTitleText(e.target.value);
+    localStorage.setItem('titleText', JSON.stringify(e.target.value))
   }, []);
-
   const onChangeSubTitleText = useCallback((e) => {
     setSubTitleText(e.target.value);
+    localStorage.setItem('subTitleText', JSON.stringify(e.target.value))
   }, []);
 
   return (
@@ -62,8 +69,9 @@ export default function Write() {
         <Input.TextArea maxLength={50} placeholder="제목을 적어주세요" value={titleText} onChange={onChangeTitleText} style={{ height: '30px' }} />
         <Input.TextArea maxLength={100} placeholder="소제목을 적어주세요" value={subTitleText} onChange={onChangeSubTitleText} style={{ height: '30px' }} />
         <WysiwygEditor onChange={(value) => setText(value)} />
-        <div>
-          <Button type="primary" style={{ float: 'right' }} htmlType="submit" loading={isAddingPost}>짹짹</Button>
+        <br />
+        <div style={{ textAlign: 'center' }} >
+          <Button htmlType="submit" loading={isAddingPost}>Submit</Button>
         </div>
     </Form>
   )

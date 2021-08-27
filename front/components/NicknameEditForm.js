@@ -2,6 +2,7 @@ import { Button, Form, Input } from 'antd';
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router';
+import gravatar from 'gravatar';
 
 import { EDIT_NICKNAME_REQUEST } from '../reducers/user';
 
@@ -13,6 +14,7 @@ const NicknameEditForm = () => {
   const onChangeNickname = useCallback((e) => {
     setEditedName(e.target.value);
   }, []);
+  
   const onEditNickname = useCallback((e) => {
     e.preventDefault();
     dispatch({
@@ -22,13 +24,23 @@ const NicknameEditForm = () => {
     Router.push('/');
   }, [editedName]);
 
-  console.log(editedName);
+  //console.log(editedName);
+
+  var gravatarEmail = '';
+  if (me) {
+      gravatarEmail = me.nickname + '@gmail.com';
+  }
 
   return (
     <div>
-        <Form style={{ marginBottom: '20px', border: '1px solid #d9d9d9', padding: '20px' }} onSubmit={onEditNickname}>
-            <Input addonBefore="닉네임" value={editedName || (me && me.nickname)} onChange={onChangeNickname} />
-            <Button type="primary" htmlType="submit" loading={isEditingNickname}>수정</Button>
+        <img 
+            src={gravatar.url(gravatarEmail, { s: '28px', d: 'retro' })}
+            style={{ width: '80px', borderRadius: '80px' }}
+        />
+        <Form onSubmit={onEditNickname}>
+            <Input addonBefore="닉네임" value={editedName || (me && me.nickname)} onChange={onChangeNickname} style={{ width: '300px' }} />
+            {'\u00A0'}{'\u00A0'}
+            <Button type="primary" htmlType="submit" loading={isEditingNickname} >수정</Button>
         </Form>
     </div>
 

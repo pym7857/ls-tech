@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Icon, Card, Avatar, Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import gravatar from 'gravatar';
 
 import "@uiw/react-md-editor/dist/markdown-editor.css";
 import "@uiw/react-markdown-preview/dist/markdown.css";
@@ -13,6 +14,11 @@ const ArticleCard = ({ article }) => {
     const dispatch = useDispatch();
 
     console.log('article: ', article);
+    var gravatarEmail = '';
+    if (article.User) {
+        gravatarEmail = article.User.nickname + '@gmail.com';
+    }
+    //console.log(gravatarEmail);
 
     return ( // 해당 제목에 해당하는 게시글 보여줌 
         <div>
@@ -25,7 +31,12 @@ const ArticleCard = ({ article }) => {
                     <Card.Meta
                         avatar={(
                             <Link href={{ pathname: '/user', query: { id: article.User.id } }} as={`/user/${article.User.id}`}>
-                                <a><Avatar>{article.User.nickname[0]}</Avatar></a>
+                                <a>
+                                    <img 
+                                        src={gravatar.url(gravatarEmail, { s: '28px', d: 'retro' })}
+                                        style={{ borderRadius: '20px' }}
+                                    />
+                                </a>
                             </Link>
                         )}
                         title={article.User.nickname}
@@ -64,11 +75,14 @@ const ArticleCard = ({ article }) => {
             </div>
 
             <div>
-                { me.id && me.id === article.User.id
+                <br />
+                { me && me.id == article.User.id
                     ?
-                    <div style={{ float: 'right' }} >
+                    <div style={{ textAlign: 'center'}} >
                         <Link href={{ pathname: '/edit', query: { id: article.id } }} as={`/edit/${article.id}`} key={article.id}>
-                            <a><Button type="primary">글 수정</Button></a>
+                            <a>
+                                <Button>글 수정</Button>
+                            </a>
                         </Link>
                     </div>  
                     :

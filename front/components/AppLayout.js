@@ -1,17 +1,20 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { Menu, Input, Row, Col, Dropdown, Icon, message } from 'antd';
 import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
+import gravatar from 'gravatar';
 
 import { LOAD_USER_REQUEST } from '../reducers/user';
 import { LOAD_ALL_HASHTAGS_REQUEST } from '../reducers/post';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 
 const AppLayout = ({ children }) => {
+    const [searchText, setSearchText] = useState('');
     const { me } = useSelector(state => state.user);
     const { hashTags } = useSelector(state => state.post);
+    const { mainPosts } = useSelector(state => state.post);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -47,18 +50,39 @@ const AppLayout = ({ children }) => {
         </Menu>
       );
 
+    const onChangeSearchBox = useCallback((e) => {
+        //console.log(e.target.value);
+        setSearchText(e.target.value);
+    }, []);
+
+    //console.log(searchText);
+    //console.log('mainPosts: ', mainPosts);
+
+    var gravatarEmail = '';
+    if (me) {
+        gravatarEmail = me.nickname + '@gmail.com';
+    }
+
     return (
         <div>
             <Menu mode="horizontal">
                 <Menu.Item key="home"><Link href="/"><a style={{ color: 'orange', fontWeight: 'bold', fontSize: '20px' }} ><Icon type="twitter" style={{ fontSize: '20px' }} />LS-Tech</a></Link></Menu.Item>
                 <Menu.Item key="mail">
-                    <Input.Search enterButton style={{ verticalAlign: 'middle' }} />
+                    <Input.Search 
+                        enterButton style={{ verticalAlign: 'middle' }} 
+                        onChange={onChangeSearchBox}
+                    />
                 </Menu.Item>
                 {me && <Menu.Item key="write"><Link href="/write"><a>글쓰기</a></Link></Menu.Item>}
                 {me 
                     ? <Menu.Item key="menu" style={{ float: 'right' }} >
                         <div id="components-dropdown-demo-dropdown-button">
                             <Dropdown.Button overlay={menu}>
+                                <img 
+                                    src={gravatar.url(gravatarEmail, { s: '28px', d: 'retro' })}
+                                    style={{ width:'15px', borderRadius: '20px' }}
+                                />
+                                {'\u00A0'}
                                 {me.nickname}
                             </Dropdown.Button>
                         </div>
