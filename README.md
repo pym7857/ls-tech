@@ -32,5 +32,5 @@
 - [ ] Excel Viewer
 - [ ] SSR 적용 
 - [ ] 렌더링 최적화 (=속도 문제 개선)
-- [ ] Code splitting
+- [ ] Next Code splitting --> next/dynamic --> 현재 Home에만 적용해놓음
 - [ ] AWS 호스팅
