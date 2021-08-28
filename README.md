@@ -22,7 +22,14 @@
 - [x] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
 - [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 띄우기 
   - 팀 페이지 + 개인 페이지
-  - Workspace와 Channel은 layout에 들어가야됨
+  - Workspace는 layout에 들어가야됨
+  - TODO: Workspace생성 버튼(+) --> 누르면, 워크스페이스 생성
+  - TODO: postDB에 treeNumber 컬럼(=난수) 추가 --> 방법: sequelize수정후, node_moduels삭제후, back>npm run dev
+  - TODO: pages --> root임. /spaces/{WorkspaceName앞 세글자}/pages 들어갔을때, 해당 pages안의 recent posts 보여주기 
+  - TODO: pages [...] 버튼 누르면, 총 2단계까지만 생성가능하도록. Big Subject , Small Subject (=티스토리)
+  - TODO: 라우터 구조체계 다 바꿔야됨 (기존: /article/1)
+  - TODO: 끝단 url : /spaces/{WorkspaceName앞 세글자}/pages/{treeNumber}/YM(=페이지 이름) --> 여기에도 post있을 수 있고, 
+  - TODO: 또는 url : /spaces/{WorkspaceName앞 세글자}/pages/{treeNumber}/YM/algorithm(=페이지 이름) --> 여기에도 post있을 수 있다
 - [ ] ✔ 검색봇이 긁어갈 수 있는 범위 설정 --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
 - [ ] ✔ `비밀글` 선택/비선택
 - [ ] ✔ 글 공유 기능 
