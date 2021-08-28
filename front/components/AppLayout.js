@@ -5,10 +5,28 @@ import { Menu, Input, Row, Col, Dropdown, Icon, message } from 'antd';
 import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
 import gravatar from 'gravatar';
+import { ReadOutlined, EllipsisOutlined, LinkedinOutlined } from '@ant-design/icons';
 
 import { LOAD_USER_REQUEST } from '../reducers/user';
 import { LOAD_ALL_HASHTAGS_REQUEST } from '../reducers/post';
 import { LOG_OUT_REQUEST } from '../reducers/user';
+
+import {
+    AddButton,
+    Channels,
+    Chats,
+    Header,
+    LogOutButton,
+    MenuScroll,
+    ProfileImg,
+    ProfileModal,
+    RightMenu,
+    WorkspaceButton,
+    WorkspaceModal,
+    WorkspaceName,
+    Workspaces,
+    WorkspaceWrapper,
+} from './LeftLayoutStyles';
 
 const AppLayout = ({ children }) => {
     const [searchText, setSearchText] = useState('');
@@ -66,7 +84,13 @@ const AppLayout = ({ children }) => {
     return (
         <div>
             <Menu mode="horizontal">
-                <Menu.Item key="home"><Link href="/"><a style={{ color: 'orange', fontWeight: 'bold', fontSize: '20px' }} ><Icon type="twitter" style={{ fontSize: '20px' }} />LS-Tech</a></Link></Menu.Item>
+                <Menu.Item key="home">
+                    <Link href="/">
+                        <a style={{ color: '#000080', fontWeight: 'bold', fontSize: '20px' }} >
+                            <Icon type="twitter" style={{ fontSize: '20px' }} />LS-Tech
+                        </a>
+                    </Link>
+                </Menu.Item>
                 <Menu.Item key="mail">
                     <Input.Search 
                         enterButton style={{ verticalAlign: 'middle' }} 
@@ -92,6 +116,26 @@ const AppLayout = ({ children }) => {
             </Menu>
             <Row gutter={10}>
                 <Col span={6}>
+                    <WorkspaceWrapper>
+                        <Workspaces>
+                            <WorkspaceButton>dddddd</WorkspaceButton>
+                            <AddButton onClick={console.log('dd')}>+</AddButton>
+                        </Workspaces>
+                        <Channels>
+                            <WorkspaceName onClick={console.log('dd')}>Sleact</WorkspaceName>
+                            <MenuScroll>
+                                {/* 최상위url: /spaces/{Workspace이름첫세글자}/pages */}
+                                {/* <Link>  
+                                    <a>
+                                        <div style={{ fontSize: '30px', backgroundColor: 'green' }} >
+                                            <ReadOutlined /> pages
+                                            <EllipsisOutlined style={{ float: 'right' }} />
+                                        </div>
+                                    </a>
+                                </Link> */}
+                            </MenuScroll>
+                        </Channels>
+                    </WorkspaceWrapper>
                 </Col>
                 <Col span={14}>
                     <br />
