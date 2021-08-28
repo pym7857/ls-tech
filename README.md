@@ -21,9 +21,8 @@
 - [x] floating button --> 상태좋은 라이브러리 없음 --> 제작 X
 - [x] 페이지네이션 제작 --> https://cotak.tistory.com/112 --> TODO: 로직 짜기 
 - [ ] ✔ 트리구조 페이지 (=컨플루언스) --> 모달창 띄우기 
-  - 팀 페이지 + 개인 페이지
-  - Workspace는 layout에 들어가야됨
-  - TODO: Workspace생성 버튼(+) --> 누르면, 워크스페이스 생성
+  - 팀 페이지 + 개인 페이지 --> 현재 생각중인 구조: 팀위키(공통), 개인위키(private), 추가위키(=사용자 생성)
+  - TODO: Workspace생성 버튼(+) --> 누르면, 워크스페이스 생성 (=모달창)
   - TODO: postDB에 treeNumber 컬럼(=난수) 추가 --> 방법: sequelize수정후, node_moduels삭제후, back>npm run dev
   - TODO: pages --> root임. /spaces/{WorkspaceName앞 세글자}/pages 들어갔을때, 해당 pages안의 recent posts 보여주기 
   - TODO: pages [...] 버튼 누르면, 총 2단계까지만 생성가능하도록. Big Subject , Small Subject (=티스토리)
