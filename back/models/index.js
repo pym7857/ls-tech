@@ -5,9 +5,11 @@ const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
+db.Workspace = require('./workspace')(sequelize, Sequelize);
 db.Hashtag = require('./hashtag')(sequelize, Sequelize);
 db.Post = require('./post')(sequelize, Sequelize);
 db.User = require('./user')(sequelize, Sequelize);
+
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) { // associate쓰려면 위 3줄과 같은걸 먼저 코딩해줘야됨 (=join문을 자바스크립트로 컨트롤)

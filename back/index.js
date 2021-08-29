@@ -14,6 +14,8 @@ const postsAPIRouter = require('./routes/posts');
 const hashtagAPIRouter = require('./routes/hashtag');
 const hashtagsAPIRouter = require('./routes/hashtags');
 const articleAPIRouter = require('./routes/article');
+const workspaceAPIRouter = require('./routes/workspace');
+const workspacesAPIRouter = require('./routes/workspaces');
 
 dotenv.config(); // dotenv 실행 
 const app = express();
@@ -48,6 +50,8 @@ app.use('/api/posts', postsAPIRouter);
 app.use('/api/hashtag', hashtagAPIRouter);
 app.use('/api/hashtags', hashtagsAPIRouter);
 app.use('/api/article', articleAPIRouter);
+app.use('/api/workspace', workspaceAPIRouter);
+app.use('/api/workspaces', workspacesAPIRouter);
 
 app.listen(3065, () => {
   console.log('server is running on http://localhost:3065');

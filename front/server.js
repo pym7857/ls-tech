@@ -45,6 +45,11 @@ app.prepare().then(() => {
                                                                   
   });
 
+  server.get('/workspace/:id', (req, res) => {
+    return app.render(req, res, '/article', { id: req.params.id }); 
+                                                                  
+  });
+
   server.get('/user/:id', (req, res) => {
     return app.render(req, res, '/user', { id: req.params.id }); // pages폴더의 user.js와 연결해줌 
   });

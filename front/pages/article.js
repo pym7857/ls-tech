@@ -21,7 +21,7 @@ const Article = ({ id }) => { // getInitialProps로부터 전달받은 props
     // 순서: 기존것 -> REQUEST -> SUCCESS 
     console.log('article: ', article);
 
-    return ( // 해당 해시태그 게시물 모두 보여줌 
+    return ( // article이 배열형태 이므로 이렇게 해줌 (=실제로는 한개 들어있음)
       <div>
         {article.map(c => (
           <ArticleCard key={c} article={c} />

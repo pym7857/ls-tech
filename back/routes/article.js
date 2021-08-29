@@ -4,7 +4,7 @@ const db = require('../models');
 const router = express.Router();
 
 /* 게시글 하나 가져오기 라우터 */
-router.get('/:id', async (req, res, next) => { // GET /api/post/1
+router.get('/:id', async (req, res, next) => { // GET /api/article/1
     try {
         const article = await db.Post.findOne({ 
             where: {

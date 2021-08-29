@@ -29,15 +29,15 @@ const PostCard = ({ post }) => {
     `;
 
     return (
-        <div style={{ height: '170px', borderBottom: '1px solid #d1d1d1' }} >
+        <div style={{ height: '200px', borderBottom: '1px solid #d1d1d1' }} >
             <div>
                 <div style={{ float: 'left', width: '80%' }}>
                     <div>
                         <Link href={{ pathname: '/article', query: { id: post.id } }} as={`/article/${post.id}`} >
                             <a>
                                 <p style={{ fontSize: '15px', color: 'black', marginBottom: '-2px', marginTop: '20px'}}>{post.createdAt.split('T')[0]}</p>
-                                <p style={{ fontSize: '30px', fontWeight: 'bold', color: 'black', marginBottom: '-2px'}}>{post.title}</p>
-                                <p style={{ fontSize: '20px', color: 'black'}}>{post.subTitle}</p>
+                                <p style={{ fontSize: '30px', fontWeight: 'bold', color: 'black', marginBottom: '-2px', textOverflow: 'ellipsis'}}>{post.title}</p>
+                                <p style={{ fontSize: '20px', color: 'black', textOverflow: 'ellipsis'}}>{post.subTitle}</p>
                             </a>
                         </Link>
                     </div>

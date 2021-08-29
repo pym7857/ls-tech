@@ -6,11 +6,24 @@ import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
 import gravatar from 'gravatar';
 import { ReadOutlined, EllipsisOutlined, LinkedinOutlined } from '@ant-design/icons';
+//import { useHistory } from 'react-router';
+import { 
+    BrowserRouter, 
+    Redirect, 
+    Route, 
+    Switch, 
+    useParams,
+    useHistory,
+} from 'react-router-dom';
 
 import { LOAD_USER_REQUEST } from '../reducers/user';
 import { LOAD_ALL_HASHTAGS_REQUEST } from '../reducers/post';
 import { LOG_OUT_REQUEST } from '../reducers/user';
+import { LOAD_WORKSPACES_REQUEST } from '../reducers/workspace';
 
+import Workspace from '../pages/workspace';
+
+import Modal from './Modal';
 import {
     AddButton,
     Channels,
@@ -26,14 +39,24 @@ import {
     WorkspaceName,
     Workspaces,
     WorkspaceWrapper,
-} from './LeftLayoutStyles';
+    Label,
+    Button,
+} from './AppLeftLayoutStyles';
 
 const AppLayout = ({ children }) => {
     const [searchText, setSearchText] = useState('');
+    const [showCreateWorkspaceModal, setShowCreateWorkspaceModal] = useState(false);
+    const [showWorkspaceModal, setShowWorkspaceModal] = useState(false);
+    const [newWorkspace, setNewWorkspace] = useState('');
+    const [newUrl, setNewUrl] = useState('');
     const { me } = useSelector(state => state.user);
     const { hashTags } = useSelector(state => state.post);
     const { mainPosts } = useSelector(state => state.post);
+    const { workSpaces } = useSelector(state => state.workspace);
     const dispatch = useDispatch();
+
+    const history = useHistory();
+    console.log(history);
 
     useEffect(() => {
         if (!me) {
@@ -44,7 +67,13 @@ const AppLayout = ({ children }) => {
         dispatch({
             type: LOAD_ALL_HASHTAGS_REQUEST,
         });
+        dispatch({
+            type: LOAD_WORKSPACES_REQUEST,
+        });
     }, []);
+    
+    console.log('workSpaces: ', workSpaces);
+    console.log('mainPosts: ', mainPosts);
 
     const IconFont = Icon.createFromIconfontCN({
         scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
@@ -71,6 +100,58 @@ const AppLayout = ({ children }) => {
     const onChangeSearchBox = useCallback((e) => {
         //console.log(e.target.value);
         setSearchText(e.target.value);
+    }, []);
+
+    const onClickCreateWorkspace = useCallback(() => {
+        setShowCreateWorkspaceModal(true);
+      }, []);
+
+    const onCreateWorkspace = useCallback((e) => {
+        e.preventDefault();
+        // 필수값들 다 들어있나 검사 
+        if (!newWorkspace || !newWorkspace.trim()) return; // 띄어쓰기까지 막으려면 trim()도 넣어주자
+        if (!newUrl || !newUrl.trim()) return;
+        // --- 이 부분 dispatch로 수정 ---
+        // axios
+        //   .post(
+        //     '/api/workspaces', // 워크스페이스 생성하는 API
+        //     {
+        //       workspace: newWorkspace,
+        //       url: newUrl,
+        //     },
+        //     {
+        //       withCredentials: true,
+        //     },
+        //   )
+        //   .then(() => {
+        //     revalidate();
+        //     setShowCreateWorkspaceModal(false);
+        //     setNewWorkpsace(''); // 완료되고나서는 input창 비워주기  
+        //     setNewUrl(''); // 완료되고나서는 input창 비워주기 
+        //   })
+        //   .catch((error) => {
+        //     console.dir(error);
+        //     toast.error(error.response?.data, { position: 'bottom-center' }); // 사용자에게 에러표시
+        //   });
+      },
+      [newWorkspace, newUrl],
+    );
+
+    const onChangeNewWorkspace = useCallback((e) => {
+        setNewWorkspace(e.target.value);
+    }, []);
+
+    const onChangeNewUrl = useCallback((e) => {
+        setNewWorkspace(e.target.value);
+    }, []);
+
+    // 화면에 있는 모든 모달들을 전부 닫는 함수 
+    const onCloseModal = useCallback(() => {
+        setShowCreateWorkspaceModal(false);
+    }, []);
+
+    const toggleWorkspaceModal = useCallback(() => {
+        setShowWorkspaceModal((prev) => !prev);
     }, []);
 
     //console.log(searchText);
@@ -116,26 +197,53 @@ const AppLayout = ({ children }) => {
             </Menu>
             <Row gutter={10}>
                 <Col span={6}>
-                    <WorkspaceWrapper>
-                        <Workspaces>
-                            <WorkspaceButton>dddddd</WorkspaceButton>
-                            <AddButton onClick={console.log('dd')}>+</AddButton>
-                        </Workspaces>
-                        <Channels>
-                            <WorkspaceName onClick={console.log('dd')}>Sleact</WorkspaceName>
-                            <MenuScroll>
-                                {/* 최상위url: /spaces/{Workspace이름첫세글자}/pages */}
-                                {/* <Link>  
-                                    <a>
-                                        <div style={{ fontSize: '30px', backgroundColor: 'green' }} >
-                                            <ReadOutlined /> pages
-                                            <EllipsisOutlined style={{ float: 'right' }} />
-                                        </div>
-                                    </a>
-                                </Link> */}
-                            </MenuScroll>
-                        </Channels>
-                    </WorkspaceWrapper>
+                    {me &&
+                        <BrowserRouter>
+                            <WorkspaceWrapper>
+                                <Workspaces>
+                                    {workSpaces.map((ws) => {
+                                        return (
+                                            // <Link key={ws.id} href={{ pathname: '/workspace', query: { url: ws.url } }} as={`/workspace/${ws.url}`} >
+                                            //     <WorkspaceButton>{ws.name.slice(0, 1).toUpperCase()}</WorkspaceButton>
+                                            // </Link>
+                                            <WorkspaceButton
+                                                // onClick={
+                                                //     () => history.push(`/workspace/{ws.url}`)
+                                                // }
+                                            >{ws.name.slice(0, 1).toUpperCase()}
+                                            </WorkspaceButton>
+                                        );
+                                    })}
+                                    <AddButton onClick={onClickCreateWorkspace}>+</AddButton>
+                                </Workspaces>
+                                <Channels>
+                                    {/* workSpaces: redux 배열, workspace: params */}
+                                    {/* <WorkspaceName onClick={toggleWorkspaceModal}>
+                                        {userData?.workSpaces.find((v) => v.url === workspace)?.name}
+                                    </WorkspaceName> */}
+                                    <WorkspaceName onClick={toggleWorkspaceModal}>
+                                        ddd
+                                    </WorkspaceName>
+                                    <MenuScroll>
+                                        dddd
+                                    </MenuScroll>
+                                </Channels>
+                            </WorkspaceWrapper>
+                            <Modal show={showCreateWorkspaceModal} onCloseModal={onCloseModal}>
+                                <form onSubmit={onCreateWorkspace}>
+                                    <Label id="workspace-label">
+                                    <span>워크스페이스 이름</span>
+                                    <Input id="workspace" value={newWorkspace} onChange={onChangeNewWorkspace} />
+                                    </Label>
+                                    <Label id="workspace-url-label">
+                                    <span>워크스페이스 url</span>
+                                    <Input id="workspace" value={newUrl} onChange={onChangeNewUrl} />
+                                    </Label>
+                                    <Button type="submit">생성하기</Button>
+                                </form>
+                            </Modal>
+                        </BrowserRouter>
+                    }
                 </Col>
                 <Col span={14}>
                     <br />
