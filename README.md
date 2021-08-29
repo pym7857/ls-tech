@@ -29,6 +29,9 @@
   - TODO: 라우터 구조체계 다 바꿔야됨 (기존: /article/1)
   - TODO: 끝단 url : /spaces/{WorkspaceName앞 세글자}/pages/{treeNumber}/YM(=페이지 이름) --> 여기에도 post있을 수 있고, 
   - TODO: 또는 url : /spaces/{WorkspaceName앞 세글자}/pages/{treeNumber}/YM/algorithm(=페이지 이름) --> 여기에도 post있을 수 있다
+- [ ] ✔ 화면 왼쪽 layout Router 이슈
+  - https://0strich.tistory.com/37
+  - https://codingbroker.tistory.com/72
 - [ ] ✔ 검색봇이 긁어갈 수 있는 범위 설정 --> robots.txt: https://searchadvisor.naver.com/guide/seo-basic-robots
 - [ ] ✔ `비밀글` 선택/비선택
 - [ ] ✔ 글 공유 기능 
