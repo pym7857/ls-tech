@@ -5,23 +5,13 @@ import { Menu, Input, Row, Col, Dropdown, Icon, message } from 'antd';
 import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
 import gravatar from 'gravatar';
-import { ReadOutlined, EllipsisOutlined, LinkedinOutlined } from '@ant-design/icons';
-//import { useHistory } from 'react-router';
-import { 
-    BrowserRouter, 
-    Redirect, 
-    Route, 
-    Switch, 
-    useParams,
-    useHistory,
-} from 'react-router-dom';
+import { ReadOutlined, EllipsisOutlined, CaretRightFilled, DownOutlined, LinkedinOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router'
 
 import { LOAD_USER_REQUEST } from '../reducers/user';
 import { LOAD_ALL_HASHTAGS_REQUEST } from '../reducers/post';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import { LOAD_WORKSPACES_REQUEST } from '../reducers/workspace';
-
-import Workspace from '../pages/workspace';
 
 import Modal from './Modal';
 import {
@@ -55,8 +45,8 @@ const AppLayout = ({ children }) => {
     const { workSpaces } = useSelector(state => state.workspace);
     const dispatch = useDispatch();
 
-    const history = useHistory();
-    console.log(history);
+    const router = useRouter()
+    console.log('router.query: ', router.query);
 
     useEffect(() => {
         if (!me) {
@@ -72,8 +62,8 @@ const AppLayout = ({ children }) => {
         });
     }, []);
     
-    console.log('workSpaces: ', workSpaces);
-    console.log('mainPosts: ', mainPosts);
+    //console.log('workSpaces: ', workSpaces);
+    //console.log('mainPosts: ', mainPosts);
 
     const IconFont = Icon.createFromIconfontCN({
         scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
@@ -85,7 +75,7 @@ const AppLayout = ({ children }) => {
         });
       }, []);
 
-    const menu = (
+    const profileMenu = (
         <Menu>
             <Menu.Item key="1">
                 <Link href="/profile"><a><Icon type="user" /> 프로필 수정</a></Link>
@@ -94,6 +84,21 @@ const AppLayout = ({ children }) => {
                 <IconFont type="icon-tuichu" />
                     로그아웃
             </Menu.Item>
+        </Menu>
+      );
+
+      const EllipsisMenu = (
+        <Menu>
+          <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+              1st menu item
+            </a>
+          </Menu.Item>
+          <Menu.Item>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+              2nd menu item
+            </a>
+          </Menu.Item>
         </Menu>
       );
 
@@ -182,7 +187,7 @@ const AppLayout = ({ children }) => {
                 {me 
                     ? <Menu.Item key="menu" style={{ float: 'right' }} >
                         <div id="components-dropdown-demo-dropdown-button">
-                            <Dropdown.Button overlay={menu}>
+                            <Dropdown.Button overlay={profileMenu}>
                                 <img 
                                     src={gravatar.url(gravatarEmail, { s: '28px', d: 'retro' })}
                                     style={{ width:'15px', borderRadius: '20px' }}
@@ -198,34 +203,38 @@ const AppLayout = ({ children }) => {
             <Row gutter={10}>
                 <Col span={6}>
                     {me &&
-                        <BrowserRouter>
+                        <div>
+                            <ul>
+                                
+                            </ul>
                             <WorkspaceWrapper>
                                 <Workspaces>
                                     {workSpaces.map((ws) => {
                                         return (
-                                            // <Link key={ws.id} href={{ pathname: '/workspace', query: { url: ws.url } }} as={`/workspace/${ws.url}`} >
-                                            //     <WorkspaceButton>{ws.name.slice(0, 1).toUpperCase()}</WorkspaceButton>
-                                            // </Link>
-                                            <WorkspaceButton
-                                                // onClick={
-                                                //     () => history.push(`/workspace/{ws.url}`)
-                                                // }
-                                            >{ws.name.slice(0, 1).toUpperCase()}
-                                            </WorkspaceButton>
+                                            <Link key={ws.id} href={{ pathname: '/workspace', query: { url: ws.url } }} as={`/workspace/${ws.url}`} >
+                                                <WorkspaceButton>{ws.name.slice(0, 1).toUpperCase()}</WorkspaceButton>
+                                            </Link>
                                         );
                                     })}
                                     <AddButton onClick={onClickCreateWorkspace}>+</AddButton>
                                 </Workspaces>
                                 <Channels>
-                                    {/* workSpaces: redux 배열, workspace: params */}
-                                    {/* <WorkspaceName onClick={toggleWorkspaceModal}>
-                                        {userData?.workSpaces.find((v) => v.url === workspace)?.name}
-                                    </WorkspaceName> */}
                                     <WorkspaceName onClick={toggleWorkspaceModal}>
-                                        ddd
+                                        {router.query.url}
                                     </WorkspaceName>
                                     <MenuScroll>
-                                        dddd
+                                        {router.query.url &&
+                                            <div style={{ fontSize: '20px' }} >
+                                                <CaretRightFilled />
+                                                <ReadOutlined />{'\u00A0'}Pages
+                                                <div style={{ float: 'right', marginTop: '3px', marginRight: '5px' }}>
+                                                    <Dropdown overlay={EllipsisMenu} >
+                                                        <EllipsisOutlined />
+                                                    </Dropdown>
+                                                </div>
+                                                
+                                            </div>
+                                        }
                                     </MenuScroll>
                                 </Channels>
                             </WorkspaceWrapper>
@@ -242,7 +251,7 @@ const AppLayout = ({ children }) => {
                                     <Button type="submit">생성하기</Button>
                                 </form>
                             </Modal>
-                        </BrowserRouter>
+                        </div>
                     }
                 </Col>
                 <Col span={14}>
