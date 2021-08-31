@@ -28,6 +28,7 @@ export const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS';
 export const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE';
 
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
+export const ADD_WORKSPACE_TO_ME = 'ADD_WORKSPACE_TO_ME';
 
 // reducer: action에 따라 state바꾸는 역할 
 const reducer = (state = initialState, action) => {
@@ -96,6 +97,15 @@ const reducer = (state = initialState, action) => {
             me: {
               ...state.me,
               Posts: [{ id: action.data }, ...state.me.Posts],
+            },
+          };
+        }
+        case ADD_WORKSPACE_TO_ME: {
+          return {
+            ...state,
+            me: {
+              ...state.me,
+              Workspaces: [{ id: action.data }, ...state.me.Workspaces],
             },
           };
         }

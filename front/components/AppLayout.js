@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 import { LOAD_USER_REQUEST } from '../reducers/user';
 import { LOAD_ALL_HASHTAGS_REQUEST } from '../reducers/post';
 import { LOG_OUT_REQUEST } from '../reducers/user';
-import { LOAD_WORKSPACES_REQUEST } from '../reducers/workspace';
+import { ADD_WORKSPACE_REQUEST, LOAD_WORKSPACES_REQUEST } from '../reducers/workspace';
 
 import Modal from './Modal';
 import {
@@ -19,11 +19,7 @@ import {
     Channels,
     Chats,
     Header,
-    LogOutButton,
     MenuScroll,
-    ProfileImg,
-    ProfileModal,
-    RightMenu,
     WorkspaceButton,
     WorkspaceModal,
     WorkspaceName,
@@ -114,40 +110,62 @@ const AppLayout = ({ children }) => {
     const onCreateWorkspace = useCallback((e) => {
         e.preventDefault();
         // 필수값들 다 들어있나 검사 
-        if (!newWorkspace || !newWorkspace.trim()) return; // 띄어쓰기까지 막으려면 trim()도 넣어주자
-        if (!newUrl || !newUrl.trim()) return;
-        // --- 이 부분 dispatch로 수정 ---
-        // axios
-        //   .post(
-        //     '/api/workspaces', // 워크스페이스 생성하는 API
-        //     {
-        //       workspace: newWorkspace,
-        //       url: newUrl,
-        //     },
-        //     {
-        //       withCredentials: true,
-        //     },
-        //   )
-        //   .then(() => {
-        //     revalidate();
-        //     setShowCreateWorkspaceModal(false);
-        //     setNewWorkpsace(''); // 완료되고나서는 input창 비워주기  
-        //     setNewUrl(''); // 완료되고나서는 input창 비워주기 
-        //   })
-        //   .catch((error) => {
-        //     console.dir(error);
-        //     toast.error(error.response?.data, { position: 'bottom-center' }); // 사용자에게 에러표시
-        //   });
-      },
-      [newWorkspace, newUrl],
-    );
+        if (!newWorkspace || !newWorkspace.trim()) {
+            return alert('워크스페이스 이름을 작성하세요.');
+        }
+        if (!newUrl || !newUrl.trim()) {
+            return alert('워크스페이스 url을 작성하세요.');
+        }
+        dispatch({
+            type: ADD_WORKSPACE_REQUEST,
+            data: {
+                newWorkspace: newWorkspace,
+                newUrl: newUrl,
+            },
+        }, [newWorkspace, newUrl]);
+        setShowCreateWorkspaceModal(false);
+        setNewWorkspace(''); // 완료되고나서는 input창 비워주기  
+        setNewUrl(''); // 완료되고나서는 input창 비워주기 
+    }, [newWorkspace, newUrl]);
+
+
+    // const onCreateWorkspace = useCallback((e) => {
+    //     e.preventDefault();
+    //     // 필수값들 다 들어있나 검사 
+    //     if (!newWorkspace || !newWorkspace.trim()) return; // 띄어쓰기까지 막으려면 trim()도 넣어주자
+    //     if (!newUrl || !newUrl.trim()) return;
+    //     // --- 이 부분 dispatch로 수정 ---
+    //     // axios
+    //     //   .post(
+    //     //     '/api/workspaces', // 워크스페이스 생성하는 API
+    //     //     {
+    //     //       workspace: newWorkspace,
+    //     //       url: newUrl,
+    //     //     },
+    //     //     {
+    //     //       withCredentials: true,
+    //     //     },
+    //     //   )
+    //     //   .then(() => {
+    //     //     revalidate();
+    //     //     setShowCreateWorkspaceModal(false);
+    //     //     setNewWorkpsace(''); // 완료되고나서는 input창 비워주기  
+    //     //     setNewUrl(''); // 완료되고나서는 input창 비워주기 
+    //     //   })
+    //     //   .catch((error) => {
+    //     //     console.dir(error);
+    //     //     toast.error(error.response?.data, { position: 'bottom-center' }); // 사용자에게 에러표시
+    //     //   });
+    //   },
+    //   [newWorkspace, newUrl],
+    // );
 
     const onChangeNewWorkspace = useCallback((e) => {
         setNewWorkspace(e.target.value);
     }, []);
 
     const onChangeNewUrl = useCallback((e) => {
-        setNewWorkspace(e.target.value);
+        setNewUrl(e.target.value);
     }, []);
 
     // 화면에 있는 모든 모달들을 전부 닫는 함수 
@@ -241,12 +259,12 @@ const AppLayout = ({ children }) => {
                             <Modal show={showCreateWorkspaceModal} onCloseModal={onCloseModal}>
                                 <form onSubmit={onCreateWorkspace}>
                                     <Label id="workspace-label">
-                                    <span>워크스페이스 이름</span>
-                                    <Input id="workspace" value={newWorkspace} onChange={onChangeNewWorkspace} />
+                                        <span>워크스페이스 이름</span>
+                                        <Input id="workspace" value={newWorkspace} onChange={onChangeNewWorkspace} />
                                     </Label>
                                     <Label id="workspace-url-label">
-                                    <span>워크스페이스 url</span>
-                                    <Input id="workspace" value={newUrl} onChange={onChangeNewUrl} />
+                                        <span>워크스페이스 url</span>
+                                        <Input id="workspace" value={newUrl} onChange={onChangeNewUrl} />
                                     </Label>
                                     <Button type="submit">생성하기</Button>
                                 </form>

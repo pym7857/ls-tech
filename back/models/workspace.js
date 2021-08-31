@@ -16,8 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     });
   
     Workspace.associate = (db) => {
-        db.Workspace.belongsTo(db.User, { as: "Owner", foreignKey: "OwnerId" }); // 테이블에 UserId 컬럼이 생겨요
+        db.Workspace.belongsTo(db.User, { as: "Owner", foreignKey: "OwnerId" }); // 테이블에 OwnerId 컬럼이 생겨요
+        db.Workspace.hasMany(db.Channel, { as: "OwnedWorkspace", foreignKey: "OwnerWorkspaceId" });
     };
+    
   
     return Workspace;
 };

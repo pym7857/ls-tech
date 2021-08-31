@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => { // GET /workspaces/SIT
                 attributes: ['id', 'nickname'], // 비밀번호 가져오면 안되기 때문에 필터링 
                 as: 'Owner',
             }],
-            order: [['createdAt', 'ASC']], // DESC는 내림차순, ASC는 오름차순
+            //order: [['createdAt', 'ASC']], // DESC는 내림차순, ASC는 오름차순
         });
         //console.log('ddd', workspaces);
         res.json(workspaces);
