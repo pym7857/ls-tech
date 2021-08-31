@@ -46,7 +46,7 @@
   - useEffect()로 웹 스토리지에 상태 저장하기: https://www.daleseo.com/react-hooks-use-web-storage/ 
   - Next.js에서 window 사용 불가한 이유: https://sumini.dev/issue/000-nextjs-window,document-is-not-defined/  
   - Next.js에서 window 사용 가능한 방법: https://velog.io/@sji7532/Next-Next%EC%97%90%EC%84%9C%EC%9D%98-alert-window-document-localStorage-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C
-- [ ] 💥 버그: 새 글 쓸때도 localStorage에 있는 글자들 불러오고 있음 
+- [ ] 💥 버그: 새 글 쓸때도 localStorage에 있는 글자들 불러오고 있음 --> `글 등록` 눌렀을때, 입력창 비워주기 (제목,부제목,내용)
 - [ ] 💥 버그: 브라우저 창 축소시키면, 화면 무너짐
 - [ ] 💥 버그: 글 등록하면, 화면에 2개등록된것 처럼 보임 (처음만)
 - [ ] 💥 수정할 사항: antd아이콘 너무 무거움   
