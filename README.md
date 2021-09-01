@@ -52,6 +52,7 @@
 - [ ] 💥 수정할 사항: antd아이콘 너무 무거움   
 - [ ] 💥 버그: 왼쪽 layout 무너짐. minWidth 설정하기 
 - [ ] ✔ 생성한 워크스페이스 지우는 기능 
+- [x] (참조) flex right정렬 : https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container#using_auto_margins_for_main_axis_alignment
 - [ ] ✔ 깃허브 연동 (=단군 소프트 help) 
 - [ ] ✔ 웹 서비스 캐시 똑똑하게 다루기 --> https://toss.tech/article/smart-web-service-cache 
 - [ ] 🙄 해시태그 눌러서, 생성할 수 있는 UI 만들기  
