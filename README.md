@@ -37,6 +37,7 @@
     - --> 🙅‍♂️ 컴포넌트로 넘기면 안됨
     - --> 🙅‍♂️ Link로 넘겨도 안됨
     - --> 🙅‍♂️ 아이디어: subChannel은 mainChannel에 이동해서만 만들 수 있도록 하자 
+    - --> https://github.com/frontend-collective/react-sortable-tree
 - [x] 화면 왼쪽 layout Router 이슈
   - https://0strich.tistory.com/37
   - https://codingbroker.tistory.com/72
