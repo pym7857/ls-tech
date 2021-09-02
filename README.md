@@ -55,6 +55,7 @@
 - [x] (참조) flex right정렬 : https://developer.mozilla.org/ko/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container#using_auto_margins_for_main_axis_alignment
 - [ ] ✔ 깃허브 연동 (=단군 소프트 help) 
 - [ ] ✔ 웹 서비스 캐시 똑똑하게 다루기 --> https://toss.tech/article/smart-web-service-cache 
+- [ ] ✔ TODO: 시작화면 팀위키로 바꾸기 (url)
 - [ ] ✔ 채널 DB 설계
   - 현재 : (하나의)ws에대한 (다수의)채널1 불러오기 + (하나의)채널1에 대한 (다수의)채널2 불러오기 
   - --> 채널2는 눌렀을때 불러오기 (=노드버드에서 댓글 버튼 눌렀을때 활성화 되는것과 똑같이)  
