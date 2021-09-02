@@ -10,11 +10,24 @@ import {
     ADD_WORKSPACE_FAILURE,
     ADD_WORKSPACE_REQUEST,
     ADD_WORKSPACE_SUCCESS,
+    LOAD_CHANNELS_FAILURE,
+    LOAD_CHANNELS_REQUEST,
+    LOAD_CHANNELS_SUCCESS,
+    LOAD_CHANNEL2S_FAILURE,
+    LOAD_CHANNEL2S_REQUEST,
+    LOAD_CHANNEL2S_SUCCESS,
+    ADD_CH1_FAILURE,
+    ADD_CH1_REQUEST,
+    ADD_CH1_SUCCESS,
+    ADD_CH2_FAILURE,
+    ADD_CH2_REQUEST,
+    ADD_CH2_SUCCESS,
+    ADD_CH1_TO_WORKSPACE,
 } from '../reducers/workspace';
 import { ADD_WORKSPACE_TO_ME } from '../reducers/user';
 
 function loadWorkspacesAPI() {
-    return axios.get('/workspaces'); // 로그인안한 사용자들도 글 목록 볼 수 있음 --> withCredentials: true 넣어줄 필요 X 
+    return axios.get('/workspaces');
 }
 function* loadWorkspaces() {
     try {
@@ -82,10 +95,102 @@ function* watchAddWorkspace() {
     yield takeLatest(ADD_WORKSPACE_REQUEST, addWorkspace);
 }
 
+function loadChannelsAPI(workspaceUrl) {
+  return axios.get(`/workspaces/${workspaceUrl}`); 
+}
+function* loadChannels(action) {
+  try {
+      const result = yield call(loadChannelsAPI, action.data);
+      yield put({
+          type: LOAD_CHANNELS_SUCCESS,
+          data: result.data,
+      });
+  } catch (e) {
+      yield put({
+          type: LOAD_CHANNELS_FAILURE,
+          error: e,
+      });
+  }
+}
+function* watchLoadChannels() {
+  yield takeLatest(LOAD_CHANNELS_REQUEST, loadChannels);
+}
+
+function loadChannels2API(ch1Id) {
+  return axios.get(`/workspaces/channel2/${ch1Id}`); 
+}
+function* loadChannels2(action) {
+  try {
+      const result = yield call(loadChannels2API, action.data);
+      yield put({
+          type: LOAD_CHANNEL2S_SUCCESS,
+          data: result.data,
+      });
+  } catch (e) {
+      yield put({
+          type: LOAD_CHANNEL2S_FAILURE,
+          error: e,
+      });
+  }
+}
+function* watchLoadChannels2() {
+  yield takeLatest(LOAD_CHANNEL2S_REQUEST, loadChannels2);
+}
+
+function addChannel1API(channel1Data) {
+  return axios.post('/workspace/ch1', channel1Data, {
+    withCredentials: true,
+  });
+}
+function* addChannel1(action) {
+  try {
+    const result = yield call(addChannel1API, action.data);
+    yield put({ // workspace reducer의 데이터를 수정 
+      type: ADD_CH1_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: ADD_CH1_FAILURE,
+      error: e,
+    });
+  }
+}
+function* watchAddChannel1() {
+  yield takeLatest(ADD_CH1_REQUEST, addChannel1);
+}
+
+function addChannel2API(channel2Data) {
+  return axios.post('/workspace/ch2', channel2Data, {
+    withCredentials: true,
+  });
+}
+function* addChannel2(action) {
+  try {
+    const result = yield call(addChannel2API, action.data);
+    yield put({ // workspace reducer의 데이터를 수정 
+      type: ADD_CH2_SUCCESS,
+      data: result.data,
+    });
+  } catch (e) {
+    yield put({
+      type: ADD_CH2_FAILURE,
+      error: e,
+    });
+  }
+}
+function* watchAddChannel2() {
+  yield takeLatest(ADD_CH2_REQUEST, addChannel2);
+}
+
 export default function* workspaceSaga() {
   yield all([
     fork(watchLoadWorkSpaces),
     fork(watchLoadWorkSpace),
     fork(watchAddWorkspace),
+    fork(watchLoadChannels),
+    fork(watchLoadChannels2),
+    fork(watchAddChannel1),
+    fork(watchAddChannel2),
   ]);
 }

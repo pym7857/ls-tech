@@ -17,11 +17,12 @@ const Workspace = ({ url }) => { // getInitialProps로부터 전달받은 props
     }, [url]);
 
     // 순서: 기존것 -> REQUEST -> SUCCESS 
-    console.log('url: ', url);
-    console.log('workspace: ', workspace);
+    //console.log('url: ', url);
+    //console.log('workspace: ', workspace);
 
     return ( // workspace가 배열형태 이므로 이렇게 해줌 (=실제로는 한개 들어있음)
       <div>
+        내용내용
         {workspace.map(c => 
           c.name
         )}

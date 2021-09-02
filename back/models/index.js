@@ -5,7 +5,8 @@ const db = {};
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-db.Channel = require('./channel')(sequelize, Sequelize);
+db.Channel2 = require('./channel2')(sequelize, Sequelize);
+db.Channel1 = require('./channel1')(sequelize, Sequelize);
 db.Workspace = require('./workspace')(sequelize, Sequelize);
 db.Hashtag = require('./hashtag')(sequelize, Sequelize);
 db.Post = require('./post')(sequelize, Sequelize);

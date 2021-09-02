@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-    const Channel = sequelize.define('Channel', { // 테이블명은 channels
-        name1: {
+    const Channel2 = sequelize.define('Channel2', { // 테이블명은 channel2s
+        name: {
             type: DataTypes.STRING(30), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
             allowNull: false, // 필수
             unique: true, // 고유한 값
         },
-        name2: {
-            type: DataTypes.STRING(30), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
+        url: {
+            type: DataTypes.STRING(30),
             allowNull: false, // 필수
             unique: true, // 고유한 값
         },
@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       collate: 'utf8_general_ci', // 한글이 저장돼요
     });
   
-    Channel.associate = (db) => {
-        db.Channel.belongsTo(db.Workspace, { as: "OwnerWorkspace", foreignKey: "OwnerWorkspaceId" }); // 테이블에 WorkspaceId 컬럼이 생겨요
+    Channel2.associate = (db) => {
+        db.Channel2.belongsTo(db.Channel1, { as: "OwnerChannel", foreignKey: "OwnerChannelId" }); // 테이블에 WorkspaceId 컬럼이 생겨요
     };
   
-    return Channel;
+    return Channel2;
 };

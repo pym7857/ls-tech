@@ -46,7 +46,12 @@ app.prepare().then(() => {
   });
 
   server.get('/workspace/:id', (req, res) => {
-    return app.render(req, res, '/article', { id: req.params.id }); 
+    return app.render(req, res, '/workspace', { id: req.params.id }); 
+                                                                  
+  });
+
+  server.get('/workspaces/:url', (req, res) => {
+    return app.render(req, res, '/workspaces', { url: req.params.url }); 
                                                                   
   });
 

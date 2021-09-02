@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Workspace = sequelize.define('Workspace', { // 테이블명은 workspaces
+    const Channel1 = sequelize.define('Channel1', { // 테이블명은 channel1s
         name: {
             type: DataTypes.STRING(30), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
             allowNull: false, // 필수
@@ -15,11 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       collate: 'utf8_general_ci', // 한글이 저장돼요
     });
   
-    Workspace.associate = (db) => {
-        db.Workspace.belongsTo(db.User, { as: "Owner", foreignKey: "OwnerId" }); // 테이블에 OwnerId 컬럼이 생겨요
-        db.Workspace.hasMany(db.Channel1, { as: "OwnedWorkspace", foreignKey: "OwnerWorkspaceId" });
+    Channel1.associate = (db) => {
+        db.Channel1.belongsTo(db.Workspace, { as: "OwnerWorkspace", foreignKey: "OwnerWorkspaceId" }); // 테이블에 WorkspaceId 컬럼이 생겨요
+        db.Channel1.hasMany(db.Channel2, { as: "OwnedChannel", foreignKey: "OwnerChannelId" });
     };
-    
   
-    return Workspace;
+    return Channel1;
 };
