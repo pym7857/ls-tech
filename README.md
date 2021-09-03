@@ -39,6 +39,8 @@
     - --> 🙅‍♂️ 아이디어: subChannel은 mainChannel에 이동해서만 만들 수 있도록 하자 
     - --> https://github.com/frontend-collective/react-sortable-tree
     - --> https://github.com/frontend-collective/react-sortable-tree/issues/731
+    - --> <b>💡아이디어(21.9.3)</b>
+      - ✔하
 - [x] 화면 왼쪽 layout Router 이슈
   - https://0strich.tistory.com/37
   - https://codingbroker.tistory.com/72
