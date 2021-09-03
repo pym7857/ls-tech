@@ -29,7 +29,6 @@ router.get('/:url', async (req, res, next) => {
         const ws = await db.Workspace.findOne({
             where: { url: req.params.url }
         });
-        console.log('>>>> ws', ws);
         const channel1s = await db.Channel1.findAll({ 
             where: { OwnerWorkspaceId: ws.id },
             include: [{ // workspace 정보도 함께 가져오기 
@@ -39,7 +38,6 @@ router.get('/:url', async (req, res, next) => {
             }],
             //order: [['createdAt', 'ASC']], // DESC는 내림차순, ASC는 오름차순
         });
-        console.log('>>>> channel1s', channel1s);
         res.json(channel1s);
     } catch (e) {
         console.error(e);

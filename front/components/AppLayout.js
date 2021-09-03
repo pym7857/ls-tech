@@ -8,6 +8,10 @@ import gravatar from 'gravatar';
 import { ReadOutlined, EllipsisOutlined, CaretRightFilled, CaretDownOutlined, DownOutlined, LinkedinOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 
+// import dynamic from 'next/dynamic';
+// const SortableTree = dynamic(import('react-sortable-tree'), { ssr: false });
+// import 'react-sortable-tree/style.css';
+
 import { LOAD_USER_REQUEST } from '../reducers/user';
 import { LOAD_ALL_HASHTAGS_REQUEST } from '../reducers/post';
 import { LOG_OUT_REQUEST } from '../reducers/user';
@@ -59,6 +63,9 @@ const AppLayout = ({ children }) => {
     const router = useRouter()
     console.log('router.query.url: ', router.query.url);
 
+    // const [ treeData, setTreeData ] = useState( [] );
+	// const [ loaded, setLoaded ] = useState( false );
+
     useEffect(() => {
         if (!me) {
             dispatch({
@@ -71,6 +78,12 @@ const AppLayout = ({ children }) => {
         dispatch({
             type: LOAD_WORKSPACES_REQUEST,
         });
+        // setTreeData(
+		// 	[
+		// 		{ title: 'Chicken', children: [ { title: 'Egg' } ] },
+		// 		{ title: 'Fish', children: [ { title: 'fingerline' } ] },
+		// 	]
+		// );
     }, []);
 
     const currentUrl = router.query.url;
@@ -295,7 +308,93 @@ const AppLayout = ({ children }) => {
             </Menu>
             <Row gutter={10}>
                 <Col span={6}>
-                    react-sortable-tree
+                    {me && 
+                            <div>
+                                <WorkspaceWrapper>
+                                    <Workspaces>
+                                        {workSpaces.map((ws) => {
+                                            return (
+                                                <Link key={ws.id} href={{ pathname: '/workspace', query: { url: ws.url } }} as={`/workspace/${ws.url}`} >
+                                                    <WorkspaceButton>
+                                                        {ws.name.slice(0, 1).toUpperCase()}
+                                                    </WorkspaceButton>
+                                                </Link>
+                                            );
+                                        })}
+                                        <AddButton onClick={onClickCreateWorkspace}>+</AddButton>
+                                    </Workspaces>
+
+                                    <Channels>
+                                        <WorkspaceName onClick={toggleWorkspaceModal}>
+                                            {router.query.url}
+                                        </WorkspaceName>
+                                        <MenuScroll>
+                                            {router.query.url &&
+                                                <div style={{ fontSize: '20px', fontWeight: 'bold', display: 'flex' }} >
+                                                    <div>
+                                                        <ReadOutlined />{'\u00A0'}Pages
+                                                    </div>
+                                                    <div style={{ marginLeft: 'auto', marginRight: '5px' }} >
+                                                        <Dropdown overlay={EllipsisMenu} >
+                                                            <EllipsisOutlined />
+                                                        </Dropdown>
+                                                    </div>
+                                                </div>
+                                            }
+                                            {
+                                                channels.map((ch) => {
+                                                    return (
+                                                        <div>
+                                                            {ch.name}
+                                                        </div>
+                                                    );
+                                                })
+                                            }
+                                        </MenuScroll>
+                                    </Channels>
+                                </WorkspaceWrapper>
+
+                                <Modal show={showCreateWorkspaceModal} onCloseModal={onCloseModal}>
+                                    <form onSubmit={onCreateWorkspace}>
+                                        <Label id="workspace-label">
+                                            <span>워크스페이스 이름</span>
+                                            <Input id="workspace" value={newWorkspace} onChange={onChangeNewWorkspace} />
+                                        </Label>
+                                        <Label id="workspace-url-label">
+                                            <span>워크스페이스 url</span>
+                                            <Input id="workspace" value={newUrl} onChange={onChangeNewUrl} />
+                                        </Label>
+                                        <Button type="submit">생성하기</Button>
+                                    </form>
+                                </Modal>
+                                <Modal show={showCreateMainPageModal} onCloseModal={onCloseModal}>
+                                    <form onSubmit={onCreateMainPage}>
+                                        <Label id="mainPage-label">
+                                            <span>페이지 이름</span>
+                                            <Input id="mainPage" value={newMainPage} onChange={onChangeNewMainPage} />
+                                        </Label>
+                                        <Label id="mainPage-url-label">
+                                            <span>페이지 url</span>
+                                            <Input id="mainPage" value={newMainPageUrl} onChange={onChangeNewMainPageUrl} />
+                                        </Label>
+                                        <Button type="submit">생성하기</Button>
+                                    </form>
+                                </Modal>
+                                <Modal show={showCreateSubPageModal} onCloseModal={onCloseModal}>
+                                    <form onSubmit={onCreateSubPage}>
+                                        <Label id="subPage-label">
+                                            <span>서브페이지 이름</span>
+                                            <Input id="subPage" value={newSubPage} onChange={onChangeNewSubPage} />
+                                        </Label>
+                                        <Label id="subPage-url-label">
+                                            <span>서브페이지 url</span>
+                                            <Input id="subPage" value={newSubPageUrl} onChange={onChangeNewSubPageUrl} />
+                                        </Label>
+                                        <Button type="submit">생성하기</Button>
+                                    </form>
+                                </Modal>
+                            </div>
+                    }
                 </Col>
                 <Col span={14}>
                     <br />

@@ -298,7 +298,6 @@ const AppLayout = ({ children }) => {
                     {me && 
                         <div>
                             <WorkspaceWrapper>
-
                                 <Workspaces>
                                     {workSpaces.map((ws) => {
                                         return (
